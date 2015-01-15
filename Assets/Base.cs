@@ -7,11 +7,14 @@ public class Base : MonoBehaviour {
 	public int NumberOfUnits = 0;
 	public int MaxNumberOfUntis = 10;
 
-	float repeatingTime = 1f;
+	float spawnRate = 1f;	//For spawning units
+
+	float hpRegenRate = 0.2f;
 
 	//Scripts on this
 	Owner ownerScript;
 	SpriteRenderer spriteRenderer;
+	Hp hpScript;
 
 	//UI refs
 	Text numOfShipsText;
@@ -26,6 +29,7 @@ public class Base : MonoBehaviour {
 		numOfShipsText = this.GetComponentInChildren<Text> ();
 		ownerScript = this.GetComponent<Owner> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
+		hpScript = this.GetComponent<Hp> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
@@ -34,7 +38,8 @@ public class Base : MonoBehaviour {
 	void Start()
 	{
 		ChangeOwner (ownerScript.owner);
-		InvokeRepeating ("AddUnit", 0f, repeatingTime);	//Incr unit count over time, cancel invoke and invoke again to change
+		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
+		InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
 	}
 
 	void Update()
@@ -55,5 +60,13 @@ public class Base : MonoBehaviour {
 		this.ownerScript.owner = owner;
 		spriteRenderer.color = playerCols [owner];	//Change color of sprite
 		numOfShipsText.color = playerCols [owner];	//Change color of GUI text to match that of owner
+	}
+
+	void RegenHp()
+	{
+		if (hpScript.hp < hpScript.maxHp)
+		{
+			hpScript.modHp (1);
+		}
 	}
 }

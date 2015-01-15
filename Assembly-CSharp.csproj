@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Base.cs" />
+     <Compile Include="Assets\Hp.cs" />
      <Compile Include="Assets\ObjColor.cs" />
      <Compile Include="Assets\Owner.cs" />
      <Compile Include="Assets\PlayerHandler.cs" />
