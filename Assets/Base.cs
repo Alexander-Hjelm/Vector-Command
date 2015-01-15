@@ -11,6 +11,7 @@ public class Base : MonoBehaviour {
 
 	//Scripts on this
 	Owner ownerScript;
+	SpriteRenderer spriteRenderer;
 
 	//UI refs
 	Text numOfShipsText;
@@ -24,6 +25,7 @@ public class Base : MonoBehaviour {
 		//refs
 		numOfShipsText = this.GetComponentInChildren<Text> ();
 		ownerScript = this.GetComponent<Owner> ();
+		spriteRenderer = this.GetComponent<SpriteRenderer> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
@@ -31,8 +33,8 @@ public class Base : MonoBehaviour {
 
 	void Start()
 	{
+		ChangeOwner (ownerScript.owner);
 		InvokeRepeating ("AddUnit", 0f, repeatingTime);	//Incr unit count over time, cancel invoke and invoke again to change
-		numOfShipsText.color = playerCols [ownerScript.owner];	//Change color of GUI text to match that of owner
 	}
 
 	void Update()
@@ -46,5 +48,12 @@ public class Base : MonoBehaviour {
 		{
 			NumberOfUnits++;
 		}
+	}
+
+	void ChangeOwner(int owner)
+	{
+		this.ownerScript.owner = owner;
+		spriteRenderer.color = playerCols [owner];	//Change color of sprite
+		numOfShipsText.color = playerCols [owner];	//Change color of GUI text to match that of owner
 	}
 }
