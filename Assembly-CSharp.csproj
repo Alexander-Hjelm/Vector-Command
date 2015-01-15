@@ -46,11 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Base.cs" />
-     <Compile Include="Assets\Hp.cs" />
-     <Compile Include="Assets\ObjColor.cs" />
-     <Compile Include="Assets\Owner.cs" />
-     <Compile Include="Assets\PlayerHandler.cs" />
+     <Compile Include="Assets\Scripts\Base.cs" />
+     <Compile Include="Assets\Scripts\Hp.cs" />
+     <Compile Include="Assets\Scripts\MusicPlayer.cs" />
+     <Compile Include="Assets\Scripts\ObjColor.cs" />
+     <Compile Include="Assets\Scripts\Owner.cs" />
+     <Compile Include="Assets\Scripts\PlayerHandler.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
