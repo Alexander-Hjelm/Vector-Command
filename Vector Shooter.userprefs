@@ -1,14 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Base.cs">
-    <Files>
-      <File FileName="Assets\PlayerHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\ObjColor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Owner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Base.cs" Line="12" Column="26" />
-      <File FileName="Assets\Hp.cs" Line="12" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

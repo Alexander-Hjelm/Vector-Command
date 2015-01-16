@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Base.cs" />
      <Compile Include="Assets\Scripts\Hp.cs" />
+     <Compile Include="Assets\Scripts\LineScript.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\ObjColor.cs" />
      <Compile Include="Assets\Scripts\Owner.cs" />
