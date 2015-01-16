@@ -5,6 +5,7 @@ public class Ship : MonoBehaviour {
 
 	//refs
 	Hp hpScript;
+	ProxiTrigger proxiTrigger;	//For detecting other ships
 
 	//vars
 	public Vector3 objective;	//target of lifetime
@@ -18,6 +19,7 @@ public class Ship : MonoBehaviour {
 
 	void Start () {
 		hpScript = this.GetComponent <Hp>();
+		proxiTrigger = this.GetComponentInChildren<ProxiTrigger> ();
 	}
 	
 	void OnEnable()
@@ -28,12 +30,13 @@ public class Ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (inCombat && combatTarget)
+		if (inCombat && combatTarget.activeSelf)
 		{
 			target = combatTarget.transform.position;
 		}
 		else
 		{
+			inCombat = false;
 			target = objective;
 		}
 
