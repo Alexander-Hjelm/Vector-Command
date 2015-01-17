@@ -14,7 +14,7 @@ public class Base : MonoBehaviour {
 	//Scripts on this
 	Owner ownerScript;
 	SpriteRenderer spriteRenderer;
-	Hp hpScript;
+	BaseHp hpScript;
 
 	//UI refs
 	Text numOfShipsText;
@@ -29,7 +29,7 @@ public class Base : MonoBehaviour {
 		numOfShipsText = this.GetComponentInChildren<Text> ();
 		ownerScript = this.GetComponent<Owner> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
-		hpScript = this.GetComponent<Hp> ();
+		hpScript = this.GetComponent<BaseHp> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
