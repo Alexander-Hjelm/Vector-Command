@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Base : MonoBehaviour {
 
+	public Vector3 worldPos;	//Where in the world is this base?
+
 	public int NumberOfUnits = 0;
 	public int MaxNumberOfUntis = 10;
 
@@ -40,6 +42,7 @@ public class Base : MonoBehaviour {
 		ChangeOwner (ownerScript.owner);
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
 		InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
+		transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
 	}
 
 	void Update()
