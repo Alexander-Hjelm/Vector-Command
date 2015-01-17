@@ -5,7 +5,10 @@ public class Ship : MonoBehaviour {
 
 	//refs
 	Hp hpScript;
-	ProxiTrigger proxiTrigger;	//For detecting other ships
+	//ProxiTrigger proxiTrigger;	//For detecting other ships
+
+	//prefab
+	public GameObject blast;
 
 	//vars
 	public Vector3 objective;	//target of lifetime
@@ -16,10 +19,11 @@ public class Ship : MonoBehaviour {
 	float turnSpeed = 2.5f; //Settable from outside
 
 	public bool inCombat = false;
+	bool firing = false;
 
 	void Start () {
 		hpScript = this.GetComponent <Hp>();
-		proxiTrigger = this.GetComponentInChildren<ProxiTrigger> ();
+		//proxiTrigger = this.GetComponentInChildren<ProxiTrigger> ();
 	}
 	
 	void OnEnable()
@@ -30,14 +34,21 @@ public class Ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (inCombat && combatTarget.activeSelf)
+		if (inCombat && combatTarget.activeSelf)	//in combat!
 		{
 			target = combatTarget.transform.position;
+			if (!firing)
+			{
+				firing = true;
+				InvokeRepeating("Fire", 0.05f, 1f);		//Fire at target
+			}
 		}
-		else
+		else	//Not in combat, or target was destroyed
 		{
 			inCombat = false;
+			firing = false;
 			target = objective;
+			CancelInvoke("Fire");	//Make sure we're not firing
 		}
 
 		//Movement
@@ -53,8 +64,17 @@ public class Ship : MonoBehaviour {
 		//Alive?
 		if (hpScript.hp <= 0)
 		{
-			Destroy(this.gameObject);
+			CancelInvoke();		//Or else fire incvoke will continue
+			gameObject.SetActive(false);
 		}
+	}
 
+	void Fire()
+	{
+		Quaternion blastRoatation = Quaternion.LookRotation (transform.position - combatTarget.transform.position, Vector3.forward);
+		blastRoatation.x = 0.0f;	//only rot in z
+		blastRoatation.y = 0.0f;
+		GameObject blastInst = GameObject.Instantiate (blast, this.transform.position, blastRoatation) as GameObject;
+		blastInst.GetComponent<Blast> ().combatTarget = combatTarget;
 	}
 }
