@@ -27,6 +27,7 @@ public class Base : MonoBehaviour {
 	public GameObject[] neighbours; //neighbouring bases
 
 	public GameObject linePrefab;		//line prefab
+	public GameObject shipPrefab;
 
 	void Awake()
 	{
@@ -70,6 +71,11 @@ public class Base : MonoBehaviour {
 	void Update()
 	{
 		numOfShipsText.text = NumberOfUnits.ToString();
+
+		if (Input.GetKeyDown(KeyCode.A))
+		{
+			SpawnUnit(this.transform.position + Vector3.up * 2, Quaternion.identity, new Vector3(0,0,0));
+		}
 	}
 
 	void AddUnit()
@@ -77,6 +83,18 @@ public class Base : MonoBehaviour {
 		if (NumberOfUnits < MaxNumberOfUntis)
 		{
 			NumberOfUnits++;
+		}
+	}
+
+	void SpawnUnit(Vector3 pos, Quaternion rot, Vector3 targetPos)
+	{
+		if(NumberOfUnits > 0)
+		{
+			//spawns single unit w/ same owner as this base
+			GameObject unit = GameObject.Instantiate (shipPrefab, pos, rot) as GameObject;
+			unit.GetComponent<Owner> ().owner = ownerScript.owner;
+			unit.GetComponent<Ship> ().target = targetPos;
+			NumberOfUnits--;
 		}
 	}
 
