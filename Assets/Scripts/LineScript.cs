@@ -9,7 +9,14 @@ public class LineScript : MonoBehaviour {
 	//Refs to components on self
 	LineRenderer lineRenderer;
 
-	public GameObject targetBase;	//Which base shall we draw a line to?
+	//public Vector3 startPoint;	//Which point shall we draw a line from?
+	//public Vector3 endPoint;
+
+	public GameObject thisBase;
+	public GameObject targetBase;
+
+	//public Color startCol;
+	//public Color endCol;
 
 	void Start ()
 	{
@@ -19,13 +26,13 @@ public class LineScript : MonoBehaviour {
 	
 	void Update ()
 	{
-		Ray ray = new Ray (transform.parent.position, (targetBase.transform.position - transform.parent.position));
+		Ray ray = new Ray (thisBase.transform.position, (targetBase.transform.position - thisBase.transform.position));
 
-		float dist = (transform.parent.position - targetBase.transform.position).magnitude;
+		float dist = (targetBase.transform.position - thisBase.transform.position).magnitude;
 
 		lineRenderer.SetPosition (0, ray.GetPoint(0.97f));	//pos 0 = line start		//Change distance from 0.97 to dynamically adjust for base size
 		lineRenderer.SetPosition (1, ray.GetPoint(dist - 0.97f));	//pos 1 = line end
 
-		lineRenderer.SetColors (playerHandler.playerCols [this.GetComponentInParent<Owner> ().owner], playerHandler.playerCols [targetBase.GetComponent<Owner> ().owner]);
+		lineRenderer.SetColors (playerHandler.playerCols [thisBase.GetComponent<Owner> ().owner], playerHandler.playerCols [targetBase.GetComponent<Owner> ().owner]);
 	}
 }

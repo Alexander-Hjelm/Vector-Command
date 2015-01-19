@@ -12,7 +12,7 @@ public class Base : MonoBehaviour {
 	float spawnRate = 1f;	//For spawning units
 
 	float hpRegenRate = 0.2f;
-
+	
 	//Scripts on this
 	Owner ownerScript;
 	SpriteRenderer spriteRenderer;
@@ -24,6 +24,9 @@ public class Base : MonoBehaviour {
 	//Other GOs
 	GameObject playerHandler;
 	Color[] playerCols;
+	public GameObject[] neighbours; //neighbouring bases
+
+	public GameObject linePrefab;		//line prefab
 
 	void Awake()
 	{
@@ -43,6 +46,25 @@ public class Base : MonoBehaviour {
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
 		InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
 		transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
+
+		//Draw lines to neighbours
+		foreach (GameObject obj in neighbours)
+		{
+			if (obj.tag == "Base")
+			{
+				GameObject line = GameObject.Instantiate(linePrefab) as GameObject;
+				LineScript linescript = line.GetComponent<LineScript>();
+
+				//linescript.startPoint = this.transform.position;
+				//linescript.endPoint = obj.transform.position;
+
+				linescript.thisBase = this.gameObject;
+				linescript.targetBase = obj;
+
+				//linescript.startCol = playerCols [ownerScript.owner];
+				//linescript.endCol = playerCols[obj.GetComponent<Owner>().owner];
+			}
+		}
 	}
 
 	void Update()
