@@ -4,11 +4,12 @@ using System.Collections;
 public class Ship : MonoBehaviour {
 
 	//refs
+	ObjectPoolerScript blastPool;
 	Hp hpScript;
 	//ProxiTrigger proxiTrigger;	//For detecting other ships
 
 	//prefab
-	public GameObject blast;
+	//public GameObject blast;
 
 	//vars
 	public Vector3 objective;	//target of lifetime
@@ -21,7 +22,8 @@ public class Ship : MonoBehaviour {
 	public bool inCombat = false;
 	bool firing = false;
 
-	void Start () {
+	void Awake () {
+		blastPool = GameObject.FindGameObjectWithTag ("BlastPool").GetComponent<ObjectPoolerScript>();
 		hpScript = this.GetComponent <Hp>();
 		//proxiTrigger = this.GetComponentInChildren<ProxiTrigger> ();
 	}
@@ -29,6 +31,7 @@ public class Ship : MonoBehaviour {
 	void OnEnable()
 	{
 		speed = 0;
+		hpScript.hp = hpScript.maxHp;
 	}
 	
 	// Update is called once per frame
@@ -74,7 +77,13 @@ public class Ship : MonoBehaviour {
 		Quaternion blastRoatation = Quaternion.LookRotation (transform.position - combatTarget.transform.position, Vector3.forward);
 		blastRoatation.x = 0.0f;	//only rot in z
 		blastRoatation.y = 0.0f;
-		GameObject blastInst = GameObject.Instantiate (blast, this.transform.position, blastRoatation) as GameObject;
+
+		GameObject blastInst = blastPool.GetAvailablePooledObject ();
+
+		blastInst.transform.position = this.transform.position;
+		blastInst.transform.rotation = blastRoatation;
 		blastInst.GetComponent<Blast> ().combatTarget = combatTarget;
+
+		blastInst.SetActive (true);
 	}
 }

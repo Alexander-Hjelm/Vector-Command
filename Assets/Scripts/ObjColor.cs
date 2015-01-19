@@ -10,17 +10,26 @@ public class ObjColor: MonoBehaviour {
 	Owner ownerScript;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
 
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
 		ownerScript = this.GetComponent<Owner> ();
-		spriteRenderer.color = playerCols [ownerScript.owner];
 	}
-	
+
+	void Start()
+	{
+		SetColor (ownerScript.owner);
+	}
+
+	void OnEnable()
+	{
+		SetColor (ownerScript.owner);
+	}
+
 	// Update is called once per frame
-	void Update () {
-	
+	public void SetColor (int owner) {
+		spriteRenderer.color = playerCols [owner];
 	}
 }

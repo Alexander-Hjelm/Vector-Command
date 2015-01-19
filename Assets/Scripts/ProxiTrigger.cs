@@ -17,7 +17,7 @@ public class ProxiTrigger : MonoBehaviour {
 	{
 		if(other.tag == "Ship")
 		{
-			if(!shipScript.inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
+			if(!shipScript.inCombat && !other.gameObject.GetComponent<Ship>().inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
 			{
 				if (other.gameObject.GetComponent<Owner>().owner != ownerScript.owner)	//If other ship is not on our team
 				{

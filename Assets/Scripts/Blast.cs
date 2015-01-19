@@ -9,7 +9,7 @@ public class Blast : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		Invoke ("TimedDestroy", 10f);	//failsafe
+		Invoke ("TimedDestroy", 5f);	//failsafe
 	}
 	
 	// Update is called once per frame

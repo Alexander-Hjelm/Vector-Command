@@ -22,6 +22,7 @@ public class Base : MonoBehaviour {
 	Text numOfShipsText;
 
 	//Other GOs
+	ObjectPoolerScript shipPool;
 	GameObject playerHandler;
 	Color[] playerCols;
 	public GameObject[] neighbours; //neighbouring bases
@@ -36,6 +37,7 @@ public class Base : MonoBehaviour {
 		ownerScript = this.GetComponent<Owner> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
 		hpScript = this.GetComponent<BaseHp> ();
+		shipPool = GameObject.FindGameObjectWithTag ("ShipPool").GetComponent<ObjectPoolerScript> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
@@ -91,9 +93,17 @@ public class Base : MonoBehaviour {
 		if(NumberOfUnits > 0)
 		{
 			//spawns single unit w/ same owner as this base
-			GameObject unit = GameObject.Instantiate (shipPrefab, pos, rot) as GameObject;
+			GameObject unit = shipPool.GetAvailablePooledObject();
+
+			unit.transform.position = pos;
+			unit.transform.rotation = rot;
 			unit.GetComponent<Owner> ().owner = ownerScript.owner;
 			unit.GetComponent<Ship> ().target = targetPos;
+
+
+
+			unit.SetActive(true);
+
 			NumberOfUnits--;
 		}
 	}

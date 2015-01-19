@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\LineScript.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\ObjColor.cs" />
+     <Compile Include="Assets\Scripts\ObjectPoolerScript.cs" />
      <Compile Include="Assets\Scripts\Owner.cs" />
      <Compile Include="Assets\Scripts\PlayerHandler.cs" />
      <Compile Include="Assets\Scripts\ProxiTrigger.cs" />
