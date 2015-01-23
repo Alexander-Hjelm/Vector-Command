@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Base : MonoBehaviour {
@@ -25,7 +26,8 @@ public class Base : MonoBehaviour {
 	ObjectPoolerScript shipPool;
 	GameObject playerHandler;
 	Color[] playerCols;
-	public GameObject[] neighbours; //neighbouring bases
+	//public GameObject[] neighbours; //neighbouring bases
+	public List<GameObject> neighbours = new List<GameObject>();
 
 	public GameObject linePrefab;		//line prefab
 	public GameObject shipPrefab;

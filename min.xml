@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMyData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MyData>
+    <x>4.7</x>
+    <y>-1.4</y>
+	<owner>3</owner>
+	<neighbours>
+		<Neighbour id = "1" />
+		<Neighbour id = "2" />
+		<Neighbour id = "3" />
+	</neighbours>
+  </MyData>
+  <MyData>
+    <x>-3.68</x>
+    <y>-3.2</y>
+	<owner>2</owner>
+	<neighbours>
+		<Neighbour id = "3" />
+	</neighbours>
+  </MyData>
+  <MyData>
+    <x>-0.6</x>
+    <y>3.57</y>
+	<owner>1</owner>
+	<neighbours>
+		<Neighbour id = "3" />
+	</neighbours>
+  </MyData>
+  <MyData>
+    <x>0</x>
+    <y>0</y>
+	<owner>0</owner>
+  </MyData>
+    <MyData>
+    <x>-5.7</x>
+    <y>2</y>
+	<owner>3</owner>
+	<neighbours>
+		<Neighbour id = "1" />
+		<Neighbour id = "2" />
+	</neighbours>
+  </MyData>
+</ArrayOfMyData>

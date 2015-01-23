@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\MyData.cs" />
+     <Compile Include="Assets\Neighbours.cs" />
      <Compile Include="Assets\Scripts\Base.cs" />
      <Compile Include="Assets\Scripts\BaseHp.cs" />
      <Compile Include="Assets\Scripts\Blast.cs" />
@@ -58,6 +60,7 @@
      <Compile Include="Assets\Scripts\PlayerHandler.cs" />
      <Compile Include="Assets\Scripts\ProxiTrigger.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
+     <Compile Include="Assets\XMLGetter.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
