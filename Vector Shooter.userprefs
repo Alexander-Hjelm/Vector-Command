@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="min.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Base.cs">
     <Files>
-      <File FileName="Assets\XMLGetter.cs" Line="30" Column="14" />
-      <File FileName="min.xml" Line="6" Column="18" />
-      <File FileName="Assets\Neighbours.cs" Line="8" Column="1" />
-      <File FileName="Assets\MyData.cs" Line="5" Column="2" />
-      <File FileName="Assets\Scripts\Base.cs" Line="30" Column="36" />
-      <File FileName="Assets\Scripts\Ship.cs" Line="5" Column="1" />
+      <File FileName="Assets\Scripts\Base.cs" Line="103" Column="40" />
+      <File FileName="Assets\ShipSpawner.cs" Line="64" Column="49" />
+      <File FileName="Assets\Scripts\PlayerHandler.cs" Line="12" Column="17" />
+      <File FileName="Assets\Scripts\LineScript.cs" Line="29" Column="1" />
+      <File FileName="Assets\Scripts\Ship.cs" Line="26" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

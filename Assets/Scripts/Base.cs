@@ -90,7 +90,7 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	void SpawnUnit(Vector3 pos, Quaternion rot, Vector3 targetPos)
+	public void SpawnUnit(Vector3 pos, Quaternion rot, Vector3 targetPos)
 	{
 		if(NumberOfUnits > 0)
 		{
@@ -100,7 +100,7 @@ public class Base : MonoBehaviour {
 			unit.transform.position = pos;
 			unit.transform.rotation = rot;
 			unit.GetComponent<Owner> ().owner = ownerScript.owner;
-			unit.GetComponent<Ship> ().target = targetPos;
+			unit.GetComponent<Ship> ().objective = targetPos;
 
 
 
