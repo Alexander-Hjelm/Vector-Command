@@ -49,7 +49,7 @@ public class ShipSpawner : MonoBehaviour {
 			Debug.DrawLine(clickPos, mousePos);
 
 			hoverTarget = GetCollision();
-			if (hoverTarget != null && hoverTarget != colliderObj3D)
+			if (hoverTarget != null && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
 			{
 				SpawnShipInvoked();
 				CalcRandSpawnPos(hoverTarget.transform.position);
