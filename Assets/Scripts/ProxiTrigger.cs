@@ -13,13 +13,13 @@ public class ProxiTrigger : MonoBehaviour {
 		ownerScript = this.GetComponentInParent<Owner> ();
 	}
 
-	void OnTriggerStay2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.tag == "Ship")
 		{
-			if(!shipScript.inCombat && !other.gameObject.GetComponent<Ship>().inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
+			if (other.gameObject.GetComponent<Owner>().owner != ownerScript.owner)	//If other ship is not on our team
 			{
-				if (other.gameObject.GetComponent<Owner>().owner != ownerScript.owner)	//If other ship is not on our team
+				if(!shipScript.inCombat && !other.gameObject.GetComponent<Ship>().inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
 				{
 					shipScript.inCombat = true;	//enter combat
 					shipScript.combatTarget = other.gameObject;

@@ -16,7 +16,7 @@ public class Ship : MonoBehaviour {
 	public Vector3 target;	//momentary target
 	public GameObject combatTarget;
 	float speed;
-	float topSpeed = 0.05f;	//Settable from outside
+	float topSpeed = 5f;	//Settable from outside
 	float turnSpeed = 2.5f; //Settable from outside
 
 	public bool inCombat = false;
@@ -56,7 +56,7 @@ public class Ship : MonoBehaviour {
 
 		//Movement
 		speed = Mathf.Lerp (speed, topSpeed, Time.deltaTime * 0.7f);
-		this.transform.position += transform.up * speed;
+		this.transform.position += transform.up * speed * Time.deltaTime;
 		this.transform.position -= new Vector3 (0,0,transform.position.z);
 
 		Quaternion newRoatation = Quaternion.LookRotation (transform.position - target, Vector3.forward);
