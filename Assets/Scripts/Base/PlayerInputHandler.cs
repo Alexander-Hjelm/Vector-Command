@@ -22,8 +22,6 @@ public class PlayerInputHandler : MonoBehaviour {
 	{
 		baseScript = gameObject.GetComponent<Base> ();
 		shipSpawn = gameObject.GetComponent<ShipSpawn> ();
-
-
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler").GetComponent<PlayerHandler>();
 	}
 
@@ -36,39 +34,38 @@ public class PlayerInputHandler : MonoBehaviour {
 		}
 	}
 
+	void OnMouseUp()
+	{
+		shipSpawn.StopSpawn();
+		spawning = false;
+	}
+	
 	IEnumerator ShipSpawnHandler()
 	{
 		while (Input.GetMouseButton(0))
 		{
-			print ("drue");
 			mousePos = ClickPos2World();
 			Debug.DrawLine(clickPos, mousePos);
 
 			hoverTarget = GetCollision();
 			if (hoverTarget != null && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
 			{
-				SpawnShipInvoked();
-				CalcRandSpawnPos(hoverTarget.transform.position);
+				if (!spawning)
+				{
+					shipSpawn.initiateAttack(baseScript, hoverTarget.transform.parent.position);
+					spawning = true;
+				}
 			}
-
-
-
+			else
+			{
+				shipSpawn.StopSpawn();
+				spawning = false;
+			}
 
 			//If, then invoke spawn ship w/ other base as target
 
-
 			yield return null;
 		}
-	}
-
-	void SpawnShipInvoked()
-	{
-		Vector3 pos = CalcRandSpawnPos(hoverTarget.transform.position);
-		Quaternion rot = Quaternion.LookRotation (transform.position - pos, Vector3.forward);
-		rot.x = 0;
-		rot.y = 0;
-
-		shipSpawn.SpawnUnit(baseScript, pos, rot, hoverTarget.transform.parent.position);
 	}
 
 	Vector3 ClickPos2World()
@@ -91,27 +88,5 @@ public class PlayerInputHandler : MonoBehaviour {
 			return hit.collider.gameObject;
 		}
 		else return null;
-	}
-
-	Vector3 CalcRandSpawnPos(Vector3 target)	//Using trigonometry, find the point towards target base that is 1.3 units away    +    add a little random
-	{
-		float angle = Vector3.Angle(-Vector3.left, target - transform.position);
-
-		angle = 2 * Mathf.PI * angle / 360;	//to radians
-
-		Debug.DrawRay (transform.position, target - transform.position);
-		Debug.DrawRay (transform.position, -Vector3.left);
-
-		//angle could be negative
-		Vector3 cross = Vector3.Cross(-Vector3.left, target - transform.position);
-		if (cross.z < 0)
-			angle = -angle;
-
-		angle += Random.Range (-Mathf.PI / 3, Mathf.PI / 3);
-
-		Debug.Log (angle);
-
-		Vector3 spawnPos = 1.3f * new Vector3 (Mathf.Cos (angle), Mathf.Sin (angle), 0);
-		return transform.position + spawnPos;
 	}
 }

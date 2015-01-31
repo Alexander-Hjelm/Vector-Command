@@ -77,7 +77,9 @@ public class Base : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.A))
 		{
-			shipSpawn.SpawnUnit(this, this.transform.position + Vector3.up * 2, Quaternion.identity, new Vector3(0,0,0));
+			shipSpawn.baseScript = this;
+			shipSpawn.targetPos = new Vector3(0,0,0);
+			shipSpawn.SpawnUnit();
 		}
 	}
 
