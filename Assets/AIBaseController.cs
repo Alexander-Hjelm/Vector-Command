@@ -1,0 +1,99 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class AIBaseController : MonoBehaviour {
+
+	//refs to self
+	Base baseScript;
+	public CentralAI centralAI;
+
+	//vars
+	float leastFriendlies = 0;
+	float leastEnemies = 0;
+
+	float fortifyPriority = 0;
+	float attackPriority = 0;
+	
+	GameObject leastFriend;
+	GameObject leastEnemy;
+
+	List<GameObject> neighbours;
+
+	void Start()
+	{
+		baseScript = gameObject.GetComponent<Base> ();
+		neighbours = baseScript.neighbours;
+
+		centralAI = GameObject.FindGameObjectWithTag("Central AI").GetComponent<CentralAI>();
+
+		InvokeRepeating ("EvaluateNeighbours", 1f, 1f);
+	}
+
+	void EvaluateNeighbours()
+	{
+		leastFriendlies = -1;
+		leastEnemies = -1;
+
+		leastFriend = null;
+		leastEnemy = null;
+
+		foreach(GameObject n in neighbours)
+		{
+			Base nBaseScript = n.GetComponent<Base>();
+
+			if(nBaseScript.owner == baseScript.owner)	//friendly
+			{
+				if (nBaseScript.NumberOfUnits < leastFriendlies || leastFriendlies == -1)
+				{
+					leastFriendlies = nBaseScript.NumberOfUnits;
+					leastFriend = n;
+				}
+			}
+			else
+			{
+				if (nBaseScript.NumberOfUnits < leastEnemies || leastEnemies == -1)
+				{
+					leastEnemies = nBaseScript.NumberOfUnits;
+					leastEnemy = n;
+				}
+			}
+		}
+
+		if(leastFriend != null && tryChance(baseScript.NumberOfUnits, leastFriendlies))
+		{
+			fortifyPriority = 1 - leastFriendlies / baseScript.NumberOfUnits;
+			centralAI.inputRequest(new Request(this.gameObject,
+			                                   leastFriend.transform.position,
+			                                   (int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3),
+			                                   fortifyPriority,
+			                                   Request.RequestType.Fortify));
+			return;	//Don't attack
+		}
+
+		if(tryChance(baseScript.NumberOfUnits, leastEnemies))
+		{
+			print ("Attacking enemy!");
+			//Set priority      mind div(0)
+			attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
+			
+
+				centralAI.inputRequest(new Request(this.gameObject,
+			                                   leastEnemy.transform.position,
+			                                   (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 4),
+			                                   attackPriority,
+			                                   Request.RequestType.Attack));
+		}
+
+	}
+
+	bool tryChance(float us, float them)
+	{
+
+		if (Random.Range(0f , 1f) > them/us)
+		{
+			return true;
+		}
+		return false;
+	}
+}
