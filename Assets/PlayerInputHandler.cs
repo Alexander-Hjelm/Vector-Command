@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShipSpawner : MonoBehaviour {
+public class PlayerInputHandler : MonoBehaviour {
 
 	//refs to this
 	Base baseScript;
-	Owner ownerScript;
+	ShipSpawn shipSpawn;
 	public GameObject colliderObj3D;
-
+	
 	//refs to other
 	PlayerHandler playerHandler;
 
@@ -21,19 +21,15 @@ public class ShipSpawner : MonoBehaviour {
 	void Awake ()
 	{
 		baseScript = gameObject.GetComponent<Base> ();
-		ownerScript = gameObject.GetComponent<Owner> ();
+		shipSpawn = gameObject.GetComponent<ShipSpawn> ();
 
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler").GetComponent<PlayerHandler>();
 	}
 
-	void Update () {
-		
-	}
-
 	void OnMouseDown()
 	{
-		if (ownerScript.owner == playerHandler.playerInt)	//If we clicked on one o the player's bases
+		if (baseScript.owner == playerHandler.playerInt)	//If we clicked on one o the player's bases
 		{
 			clickPos = ClickPos2World();
 			StartCoroutine("ShipSpawnHandler");
@@ -72,7 +68,7 @@ public class ShipSpawner : MonoBehaviour {
 		rot.x = 0;
 		rot.y = 0;
 
-		baseScript.SpawnUnit(pos, rot, hoverTarget.transform.parent.position);
+		shipSpawn.SpawnUnit(baseScript, pos, rot, hoverTarget.transform.parent.position);
 	}
 
 	Vector3 ClickPos2World()

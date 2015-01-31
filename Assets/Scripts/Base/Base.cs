@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Base : MonoBehaviour {
 
 	public Vector3 worldPos;	//Where in the world is this base?
+	public int owner;
 
 	public int NumberOfUnits = 0;
 	public int MaxNumberOfUntis = 10;
@@ -15,15 +16,14 @@ public class Base : MonoBehaviour {
 	float hpRegenRate = 0.2f;
 	
 	//Scripts on this
-	Owner ownerScript;
 	SpriteRenderer spriteRenderer;
 	BaseHp hpScript;
+	ShipSpawn shipSpawn;
 
 	//UI refs
 	Text numOfShipsText;
 
 	//Other GOs
-	ObjectPoolerScript shipPool;
 	GameObject playerHandler;
 	Color[] playerCols;
 	//public GameObject[] neighbours; //neighbouring bases
@@ -36,10 +36,9 @@ public class Base : MonoBehaviour {
 	{
 		//refs
 		numOfShipsText = this.GetComponentInChildren<Text> ();
-		ownerScript = this.GetComponent<Owner> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
 		hpScript = this.GetComponent<BaseHp> ();
-		shipPool = GameObject.FindGameObjectWithTag ("ShipPool").GetComponent<ObjectPoolerScript> ();
+		shipSpawn = this.GetComponent<ShipSpawn> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
@@ -47,7 +46,7 @@ public class Base : MonoBehaviour {
 
 	void Start()
 	{
-		ChangeOwner (ownerScript.owner);
+		ChangeOwner (owner);
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
 		InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
 		transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
@@ -78,7 +77,7 @@ public class Base : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.A))
 		{
-			SpawnUnit(this.transform.position + Vector3.up * 2, Quaternion.identity, new Vector3(0,0,0));
+			shipSpawn.SpawnUnit(this, this.transform.position + Vector3.up * 2, Quaternion.identity, new Vector3(0,0,0));
 		}
 	}
 
@@ -90,31 +89,11 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	public void SpawnUnit(Vector3 pos, Quaternion rot, Vector3 targetPos)
+	void ChangeOwner(int newOwner)
 	{
-		if(NumberOfUnits > 0)
-		{
-			//spawns single unit w/ same owner as this base
-			GameObject unit = shipPool.GetAvailablePooledObject();
-
-			unit.transform.position = pos;
-			unit.transform.rotation = rot;
-			unit.GetComponent<Owner> ().owner = ownerScript.owner;
-			unit.GetComponent<Ship> ().objective = targetPos;
-
-
-
-			unit.SetActive(true);
-
-			NumberOfUnits--;
-		}
-	}
-
-	void ChangeOwner(int owner)
-	{
-		this.ownerScript.owner = owner;
-		spriteRenderer.color = playerCols [owner];	//Change color of sprite
-		numOfShipsText.color = playerCols [owner];	//Change color of GUI text to match that of owner
+		this.owner = newOwner;
+		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
+		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner
 	}
 
 	void RegenHp()
@@ -129,7 +108,7 @@ public class Base : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Ship"	&& !other.GetComponent<Ship>().inCombat)	//If is a ship not in combat
 		{
-			if (other.GetComponent<Owner>().owner == ownerScript.owner)	//same owner
+			if (other.GetComponent<Ship>().owner == owner)	//same owner
 			{
 				AddUnit();
 			}
@@ -138,7 +117,7 @@ public class Base : MonoBehaviour {
 				hpScript.modHp(-10);
 				if (hpScript.hp <= 0)	//dead
 				{
-					ChangeOwner(other.GetComponent<Owner>().owner);		//change owner
+					ChangeOwner(other.GetComponent<Ship>().owner);		//change owner
 					hpScript.hp = 1;
 				}
 			}

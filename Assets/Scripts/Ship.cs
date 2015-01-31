@@ -12,6 +12,7 @@ public class Ship : MonoBehaviour {
 	//public GameObject blast;
 
 	//vars
+	public int owner;
 	public Vector3 objective;	//target of lifetime
 	public Vector3 target;	//momentary target
 	public GameObject combatTarget;

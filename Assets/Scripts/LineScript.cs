@@ -33,6 +33,6 @@ public class LineScript : MonoBehaviour {
 		lineRenderer.SetPosition (0, ray.GetPoint(0.97f));	//pos 0 = line start		//Change distance from 0.97 to dynamically adjust for base size
 		lineRenderer.SetPosition (1, ray.GetPoint(dist - 0.97f));	//pos 1 = line end
 
-		lineRenderer.SetColors (playerHandler.playerCols [thisBase.GetComponent<Owner> ().owner], playerHandler.playerCols [targetBase.GetComponent<Owner> ().owner]);
+		lineRenderer.SetColors (playerHandler.playerCols [thisBase.GetComponent<Base> ().owner], playerHandler.playerCols [targetBase.GetComponent<Base> ().owner]);
 	}
 }

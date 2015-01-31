@@ -1,13 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ProxiTrigger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ShipColor.cs">
     <Files>
-      <File FileName="Assets\ShipSpawner.cs" Line="42" Column="2" />
-      <File FileName="Assets\Scripts\Base.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\XMLGetter.cs" Line="59" Column="1" />
+      <File FileName="Assets\Resources\min.xml" Line="1" Column="1" />
+      <File FileName="Assets\ShipSpawn.cs" Line="1" Column="1" />
+      <File FileName="Assets\PlayerInputHandler.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ProxiTrigger.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LineScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ProxiTrigger.cs" Line="23" Column="6" />
-      <File FileName="Assets\Scripts\Ship.cs" Line="19" Column="20" />
+      <File FileName="Assets\Scripts\Ship.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BaseColor.cs" Line="5" Column="1" />
+      <File FileName="Assets\Scripts\ShipColor.cs" Line="27" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Xml;
 
 public class XMLGetter : MonoBehaviour {
 
@@ -33,8 +34,9 @@ public class XMLGetter : MonoBehaviour {
 		{
 			baseList.Add(GameObject.Instantiate(basePrefab) as GameObject);	//inst base and add instance to base list
 
-			baseList.Last().GetComponent<Base>().worldPos = new Vector3(md.x, md.y, 0);	//assign world pos
-			baseList.Last().GetComponent<Owner>().owner = md.owner;	//assign owner
+			Base baseScript = baseList.Last().GetComponent<Base>();
+			baseScript.worldPos = new Vector3(md.x, md.y, 0);	//assign world pos
+			baseScript.owner = md.owner;	//assign owner
 			//Debug.Log (md.neighbours[0].id);
 		}
 
@@ -62,12 +64,23 @@ public class XMLGetter : MonoBehaviour {
 
 	void ReadXML()
 	{
+
 		var ser = new System.Xml.Serialization.XmlSerializer(dataList.GetType());
 
-		using (var fs = new System.IO.FileStream("min.xml", System.IO.FileMode.Open))
+		using (var fs = new System.IO.FileStream("Assets/Resources/min.xml", System.IO.FileMode.Open))
 		{
 			dataList = (List<MyData>) ser.Deserialize(fs); 
 		}
+
+		/*
+
+		XmlDocument doc = new XmlDocument();
+		TextAsset myXmlAsset = Resources.Load<TextAsset>("min");
+		doc.LoadXml(myXmlAsset.text);
+
+		dataList = doc.GetElementsByTagName ("MyData");
+
+		*/
 
 		/*
 		foreach(MyData node in dataList)
