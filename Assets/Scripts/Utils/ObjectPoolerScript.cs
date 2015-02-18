@@ -12,7 +12,7 @@ public class ObjectPoolerScript : MonoBehaviour {
 	public int pooledAmount = 20;
 	public bool willGrow = true; 	//dynamicly sized pool or not?
 
-	List<GameObject> pooledObjects;
+	public List<GameObject> pooledObjects;
 
 	void Awake()
 	{

@@ -18,7 +18,7 @@ public class Ship : MonoBehaviour {
 	public GameObject combatTarget;
 	float speed;
 	float topSpeed = 5f;	//Settable from outside
-	float turnSpeed = 2.5f; //Settable from outside
+	float turnSpeed = 4f; //Settable from outside
 
 	public bool inCombat = false;
 	bool firing = false;
@@ -34,8 +34,7 @@ public class Ship : MonoBehaviour {
 		speed = 0;
 		hpScript.hp = hpScript.maxHp;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 		if (inCombat && combatTarget.activeSelf)	//in combat!

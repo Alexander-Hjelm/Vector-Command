@@ -83,7 +83,7 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	void AddUnit()
+	public void AddUnit()
 	{
 		if (NumberOfUnits < MaxNumberOfUntis)
 		{
@@ -91,7 +91,7 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	void ChangeOwner(int newOwner)
+	public void ChangeOwner(int newOwner)
 	{
 		this.owner = newOwner;
 		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
@@ -103,28 +103,6 @@ public class Base : MonoBehaviour {
 		if (hpScript.hp < hpScript.maxHp)
 		{
 			hpScript.modHp (1);
-		}
-	}
-
-	void OnTriggerStay2D(Collider2D other)	//Check for incoming ships
-	{
-		if (other.gameObject.tag == "Ship"	&& !other.GetComponent<Ship>().inCombat)	//If is a ship not in combat
-		{
-			if (other.GetComponent<Ship>().owner == owner)	//same owner
-			{
-				AddUnit();
-			}
-			else 	//other owner
-			{
-				hpScript.modHp(-10);
-				if (hpScript.hp <= 0)	//dead
-				{
-					ChangeOwner(other.GetComponent<Ship>().owner);		//change owner
-					hpScript.hp = 1;
-				}
-			}
-
-			other.gameObject.SetActive(false);
 		}
 	}
 }

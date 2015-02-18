@@ -78,7 +78,7 @@ public class ShipSpawn : MonoBehaviour {
 		
 		angle += Random.Range (-Mathf.PI / 3, Mathf.PI / 3);
 		
-		Vector3 spawnPos = 1.3f * new Vector3 (Mathf.Cos (angle), Mathf.Sin (angle), 0);
+		Vector3 spawnPos = 1.5f * new Vector3 (Mathf.Cos (angle), Mathf.Sin (angle), 0);
 		return transform.position + spawnPos;
 	}
 }

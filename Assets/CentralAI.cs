@@ -43,7 +43,7 @@ public class CentralAI : MonoBehaviour {
 	//function for taking in new request, evaluating priority and inserting into RequestList
 	public void inputRequest(Request request)
 	{
-		print ("Sending units: " + request.howMany.ToString());
+		//print ("Sending units: " + request.howMany.ToString());
 
 		requestList.Add (request);
 	}
