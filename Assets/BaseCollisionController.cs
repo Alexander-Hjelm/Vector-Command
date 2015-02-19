@@ -8,11 +8,13 @@ public class BaseCollisionController : MonoBehaviour {
 	public BaseHp hpScript;
 	
 	public GameObject shipPool;
-	List<GameObject> shipList;
+	List<GameObject> shipList = new List<GameObject>();
 	
 	public float repTime = 0.1f;	//InvokeRep rate
 	public float threshDist = 1.4f;	//max dist for collision to occur
-	
+
+	List<GameObject> closeShips = new List<GameObject>();		//for storing ships in proximity
+
 	void Awake () {
 		baseScript = this.GetComponent<Base> ();
 		hpScript = this.GetComponent<BaseHp> ();
@@ -25,8 +27,8 @@ public class BaseCollisionController : MonoBehaviour {
 		InvokeRepeating ("CheckCollision", 0f, repTime);
 	}
 	
-	GameObject TryForCloseShip (float thresh) {
-		
+	void TryForCloseShip (float thresh) {
+
 		shipList = shipPool.GetComponent<ObjectPoolerScript> ().pooledObjects;
 		
 		if (shipList != null)
@@ -39,42 +41,45 @@ public class BaseCollisionController : MonoBehaviour {
 				{
 					if (!(ship.GetInstanceID() == this.gameObject.GetInstanceID()))	//Might be this
 					{
-						return ship;
-						print ("found Ship in range");
+						closeShips.Add(ship);
 					}
 				}
 				
 			}
 		}
-		return null;
+		return;
 	}
 	
 	void CheckCollision()	//Main
 	{
-		GameObject other = TryForCloseShip(threshDist);
-		if (other != null)
+		TryForCloseShip(threshDist);
+
+		foreach (GameObject ship in closeShips)
 		{
-			if (!other.GetComponent<Ship>().inCombat)	//If is a ship not in combat
+			if (ship != null)
 			{
-				if (other.GetComponent<Ship>().owner == baseScript.owner)	//same owner
+				if (!ship.GetComponent<Ship>().inCombat)	//If is a ship not in combat
 				{
-					baseScript.AddUnit();
-				}
-				else 	//other owner
-				{
-					hpScript.modHp(-10);
-					if (hpScript.hp <= 0)	//dead
+					if (ship.GetComponent<Ship>().owner == baseScript.owner)	//same owner
 					{
-						baseScript.ChangeOwner(other.GetComponent<Ship>().owner);		//change owner
-						hpScript.hp = 1;
+						baseScript.AddUnit();
 					}
+					else 	//other owner
+					{
+						hpScript.modHp(-10);
+						if (hpScript.hp <= 0)	//dead
+						{
+							baseScript.ChangeOwner(ship.GetComponent<Ship>().owner);		//change owner
+							hpScript.hp = 1;
+						}
+					}
+					
+					ship.gameObject.SetActive(false);
 				}
-				
-				other.gameObject.SetActive(false);
-			}
-
-
+			}	
 		}
+
+		closeShips.RemoveRange (0, closeShips.Count);
 	}
 	
 }
