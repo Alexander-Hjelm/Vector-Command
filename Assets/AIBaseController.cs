@@ -25,7 +25,7 @@ public class AIBaseController : MonoBehaviour {
 		baseScript = gameObject.GetComponent<Base> ();
 		neighbours = baseScript.neighbours;
 
-		centralAI = GameObject.FindGameObjectWithTag("Central AI").GetComponent<CentralAI>();
+		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + baseScript.owner.ToString()).GetComponent<CentralAI>();
 
 		InvokeRepeating ("EvaluateNeighbours", 1f, 1f);
 	}
