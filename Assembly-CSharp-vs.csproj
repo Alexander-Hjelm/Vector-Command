@@ -60,6 +60,9 @@
      <Compile Include="Assets\Scripts\Base\ShipSpawn.cs" />
      <Compile Include="Assets\Scripts\Blast.cs" />
      <Compile Include="Assets\Scripts\LineScript.cs" />
+     <Compile Include="Assets\Scripts\Menu Handlers\CharMenuHandler.cs" />
+     <Compile Include="Assets\Scripts\Menu Handlers\MainMenuHandler.cs" />
+     <Compile Include="Assets\Scripts\Menu Handlers\PauseMenuHandler.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerHandler.cs" />
      <Compile Include="Assets\Scripts\Ship\Hp.cs" />
