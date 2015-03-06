@@ -7,7 +7,7 @@ public class BlastCollisionController : MonoBehaviour {
 	public Blast blastScript;
 
 	public float repTime = 0.1f;	//InvokeRep rate
-	public float threshDist = 0.2f;	//max dist for collision to occur
+	public float threshDist = 0.3f;	//max dist for collision to occur
 
 	public GameObject particlePool;
 

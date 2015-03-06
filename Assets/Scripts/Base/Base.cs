@@ -85,7 +85,7 @@ public class Base : MonoBehaviour {
 
 	public void AddUnit()
 	{
-		if (NumberOfUnits < MaxNumberOfUntis)
+		if (NumberOfUnits < MaxNumberOfUntis && owner != 0)
 		{
 			NumberOfUnits++;
 		}

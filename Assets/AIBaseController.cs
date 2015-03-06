@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class AIBaseController : MonoBehaviour {
 
+	GameObject playerHandler;
+
 	//refs to self
 	Base baseScript;
 	public CentralAI centralAI;
@@ -22,6 +24,8 @@ public class AIBaseController : MonoBehaviour {
 
 	void Start()
 	{
+		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
+
 		baseScript = gameObject.GetComponent<Base> ();
 		neighbours = baseScript.neighbours;
 
@@ -32,59 +36,62 @@ public class AIBaseController : MonoBehaviour {
 
 	void EvaluateNeighbours()
 	{
-		leastFriendlies = -1;
-		leastEnemies = -1;
-
-		leastFriend = null;
-		leastEnemy = null;
-
-		foreach(GameObject n in neighbours)
+		if (baseScript.owner != 0 && baseScript.owner != playerHandler.GetComponent<PlayerHandler>().playerInt)	//If not neutral or player
 		{
-			Base nBaseScript = n.GetComponent<Base>();
+			print (gameObject.name + "Attacking enemy!");
 
-			if(nBaseScript.owner == baseScript.owner)	//friendly
+			leastFriendlies = -1;
+			leastEnemies = -1;
+
+			leastFriend = null;
+			leastEnemy = null;
+
+			foreach(GameObject n in neighbours)
 			{
-				if (nBaseScript.NumberOfUnits < leastFriendlies || leastFriendlies == -1)
+				Base nBaseScript = n.GetComponent<Base>();
+
+				if(nBaseScript.owner == baseScript.owner)	//friendly
 				{
-					leastFriendlies = nBaseScript.NumberOfUnits;
-					leastFriend = n;
+					if (nBaseScript.NumberOfUnits < leastFriendlies || leastFriendlies == -1)
+					{
+						leastFriendlies = nBaseScript.NumberOfUnits;
+						leastFriend = n;
+					}
+				}
+				else
+				{
+					if (nBaseScript.NumberOfUnits < leastEnemies || leastEnemies == -1)
+					{
+						leastEnemies = nBaseScript.NumberOfUnits;
+						leastEnemy = n;
+					}
 				}
 			}
-			else
+			//Fortify
+			if(leastFriend != null && tryChance(baseScript.NumberOfUnits, leastFriendlies))
 			{
-				if (nBaseScript.NumberOfUnits < leastEnemies || leastEnemies == -1)
-				{
-					leastEnemies = nBaseScript.NumberOfUnits;
-					leastEnemy = n;
-				}
-			}
-		}
-
-		if(leastFriend != null && tryChance(baseScript.NumberOfUnits, leastFriendlies))
-		{
-			fortifyPriority = 1 - leastFriendlies / baseScript.NumberOfUnits;
-			centralAI.inputRequest(new Request(this.gameObject,
-			                                   leastFriend.transform.position,
-			                                   (int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3),
-			                                   fortifyPriority,
-			                                   Request.RequestType.Fortify));
-			return;	//Don't attack
-		}
-
-		if(tryChance(baseScript.NumberOfUnits, leastEnemies))
-		{
-			print ("Attacking enemy!");
-			//Set priority      mind div(0)
-			attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
-			
-
+				fortifyPriority = 1 - leastFriendlies / baseScript.NumberOfUnits;
 				centralAI.inputRequest(new Request(this.gameObject,
-			                                   leastEnemy.transform.position,
-			                                   (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 4),
-			                                   attackPriority,
-			                                   Request.RequestType.Attack));
-		}
+				                                   leastFriend.transform.position,
+				                                   (int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3),
+				                                   fortifyPriority,
+				                                   Request.RequestType.Fortify));
+				return;	//Don't attack
+			}
+			//Attack
+			if(tryChance(baseScript.NumberOfUnits, leastEnemies))
+			{
+				//Set priority      mind div(0)
+				attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
+				
 
+					centralAI.inputRequest(new Request(this.gameObject,
+				                                   leastEnemy.transform.position,
+				                                   (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 10),
+				                                   attackPriority,
+				                                   Request.RequestType.Attack));
+			}
+		}
 	}
 
 	bool tryChance(float us, float them)
