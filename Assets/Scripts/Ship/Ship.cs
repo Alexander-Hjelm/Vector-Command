@@ -33,6 +33,7 @@ public class Ship : MonoBehaviour {
 	{
 		speed = 0;
 		hpScript.hp = hpScript.maxHp;
+		inCombat = false;
 	}
 
 	void Update () {
@@ -74,7 +75,7 @@ public class Ship : MonoBehaviour {
 
 	void Fire()
 	{
-		Quaternion blastRoatation = Quaternion.LookRotation (transform.position - combatTarget.transform.position, Vector3.forward);
+		Quaternion blastRoatation = Quaternion.LookRotation (transform.position - (combatTarget.transform.position), Vector3.forward);
 		blastRoatation.x = 0.0f;	//only rot in z
 		blastRoatation.y = 0.0f;
 

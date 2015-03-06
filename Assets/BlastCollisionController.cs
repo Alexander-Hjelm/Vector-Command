@@ -33,7 +33,7 @@ public class BlastCollisionController : MonoBehaviour {
 			{
 				collided = true;
 
-				blastScript.combatTarget.GetComponent<Hp>().modHp(-4);		//deal dmg
+				blastScript.combatTarget.GetComponent<Hp>().modHp(-10);		//deal dmg
 
 				if(blastScript.combatTarget.GetComponent<Hp>().hp <= 0)
 				{

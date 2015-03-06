@@ -5,7 +5,7 @@ public class Blast : MonoBehaviour {
 
 	public GameObject combatTarget = null;	//Set in ship script on enable
 
-	float speed = 25;
+	float speed = 35;
 
 	// Use this for initialization
 	void OnEnable () {

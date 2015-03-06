@@ -8,6 +8,7 @@ public class MainMenuHandler : MonoBehaviour {
 
 	public GameObject initMenu;
 	public GameObject charMenu;
+	public GameObject lvlMenu;
 	public GameObject optMenu;
 
 	public GameObject nameText;
@@ -43,6 +44,7 @@ public class MainMenuHandler : MonoBehaviour {
 	{
 		PlayerPrefs.SetString ("PlayerName", nameText.GetComponent<Text> ().text);
 		PlayerPrefs.SetString ("PlayerCol", classToggleGroup.GetComponent<ToggleGroup>().ActiveToggles().FirstOrDefault().GetComponentInChildren<Text>().text);
-		Application.LoadLevel ("Game");
+		charMenu.SetActive (false);
+		lvlMenu.SetActive (true);
 	}
 }

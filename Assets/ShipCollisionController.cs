@@ -54,8 +54,8 @@ public class ShipCollisionController : MonoBehaviour {
 		{
 			if (other.gameObject.GetComponent<Ship>().owner != shipScript.owner)	//If other ship is not on our team
 			{
-				if(!shipScript.inCombat && !other.gameObject.GetComponent<Ship>().inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
-				{
+				if(!shipScript.inCombat)	//if this ship and other ship are not in combat			&& !other.gameObject.GetComponent<Ship>().inCombat
+				{//!other.gameObject.GetComponent<Ship>().hunted
 					shipScript.inCombat = true;	//enter combat
 					shipScript.combatTarget = other.gameObject;
 				}
