@@ -38,8 +38,6 @@ public class AIBaseController : MonoBehaviour {
 	{
 		if (baseScript.owner != 0 && baseScript.owner != playerHandler.GetComponent<PlayerHandler>().playerInt)	//If not neutral or player
 		{
-			print (gameObject.name + "Attacking enemy!");
-
 			leastFriendlies = -1;
 			leastEnemies = -1;
 
@@ -70,6 +68,8 @@ public class AIBaseController : MonoBehaviour {
 			//Fortify
 			if(leastFriend != null && tryChance(baseScript.NumberOfUnits, leastFriendlies))
 			{
+				//print ("us: " + baseScript.NumberOfUnits + ", them: " + leastFriendlies);
+				//print ((int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3) + " units");
 				fortifyPriority = 1 - leastFriendlies / baseScript.NumberOfUnits;
 				centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastFriend.transform.position,
@@ -79,13 +79,12 @@ public class AIBaseController : MonoBehaviour {
 				return;	//Don't attack
 			}
 			//Attack
-			if(tryChance(baseScript.NumberOfUnits, leastEnemies))
+			if(leastEnemy != null && tryChance(baseScript.NumberOfUnits, leastEnemies))
 			{
 				//Set priority      mind div(0)
 				attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
-				
 
-					centralAI.inputRequest(new Request(this.gameObject,
+				centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastEnemy.transform.position,
 				                                   (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 10),
 				                                   attackPriority,
@@ -96,9 +95,20 @@ public class AIBaseController : MonoBehaviour {
 
 	bool tryChance(float us, float them)
 	{
+		//us += 1; 	//Prevent div by 0
+		//them += 1;
 
-		if (Random.Range(0f , 1f) > them/us)
+		//if (us == 0 || us == 1)
+		//{
+		//	return false;
+		//}
+
+		float f = Random.Range (0f, 1f);
+
+		if (f > them/us)
 		{
+			//print (this.name + ": " + f + " , " + them/us);
+			//if (us == 0) {print ("div by 0");}
 			return true;
 		}
 		return false;
