@@ -38,6 +38,7 @@ public class AIBaseController : MonoBehaviour {
 	{
 		if (baseScript.owner != 0 && baseScript.owner != playerHandler.GetComponent<PlayerHandler>().playerInt)	//If not neutral or player
 		{
+			///// LOL U NUUUZZ CHANGE DIZ BLEUGHRHEUGLR!!!!!
 			leastFriendlies = -1;
 			leastEnemies = -1;
 
