@@ -22,6 +22,8 @@ public class Ship : MonoBehaviour {
 
 	public bool inCombat = false;
 	bool firing = false;
+	
+
 
 	void Awake () {
 		blastPool = GameObject.FindGameObjectWithTag ("BlastPool").GetComponent<ObjectPoolerScript>();

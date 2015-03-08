@@ -32,6 +32,8 @@ public class Base : MonoBehaviour {
 	public GameObject linePrefab;		//line prefab
 	public GameObject shipPrefab;
 
+	public GameObject mapMarker;	//this on minimap
+
 	void Awake()
 	{
 		//refs
@@ -42,6 +44,8 @@ public class Base : MonoBehaviour {
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
+
+		mapMarker = transform.FindChild ("MapMarker").gameObject;
 	}
 
 	void Start()
@@ -49,7 +53,7 @@ public class Base : MonoBehaviour {
 		ChangeOwner (owner);
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
 		//InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
-		transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
+		//transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
 
 		//Draw lines to neighbours
 		foreach (GameObject obj in neighbours)
@@ -104,6 +108,7 @@ public class Base : MonoBehaviour {
 		this.owner = newOwner;
 		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
 		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner
+		mapMarker.GetComponent<SpriteRenderer>().color = playerCols[newOwner];
 	}
 
 	/*

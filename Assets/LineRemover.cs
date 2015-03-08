@@ -20,7 +20,7 @@ public class LineRemover : MonoBehaviour {
 		
 		foreach (GameObject line1 in lines)
 		{
-			print ("foun one!");
+			//print ("foun one!");
 			foreach (GameObject line2 in lines)
 			{
 				if (line1.activeSelf && line2.activeSelf)
