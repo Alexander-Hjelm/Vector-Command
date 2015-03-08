@@ -20,9 +20,10 @@ public class CentralAI : MonoBehaviour {
 		//print ("current cycle: " + currentCycle.ToString () + ", max: " + currentInstruction.howMany.ToString ());
 		if (currentCycle == 0 && requestList.Count != 0)	// no instruciton is loaded
 		{
-
 			currentInstruction = requestList[0];	//set current instruction
 			requestList.RemoveAt(0);				//remove the set instruction from our list
+
+			//print (currentInstruction.sendingBase.name + " Changed instruction. Sending " + currentInstruction.howMany + " units.");
 
 			currentInstruction.sendingBase.GetComponent<ShipSpawn>().initiateAttack( currentInstruction.sendingBase.GetComponent<Base>(), currentInstruction.targetPos);	//Spawn ship w/ data of
 			currentCycle++;

@@ -69,12 +69,19 @@ public class AIBaseController : MonoBehaviour {
 			//Fortify
 			if(leastFriend != null && tryChance(baseScript.NumberOfUnits, leastFriendlies))
 			{
+				int howMany = (int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3);
+
+				if (howMany == 0);
+				{
+					return;	//Dont send 0
+				}
+
 				//print ("us: " + baseScript.NumberOfUnits + ", them: " + leastFriendlies);
 				//print ((int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3) + " units");
-				fortifyPriority = 1 - leastFriendlies / baseScript.NumberOfUnits;
+				fortifyPriority = 1 - leastFriendlies / (baseScript.NumberOfUnits + 1);
 				centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastFriend.transform.position,
-				                                   (int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3),
+				                                   howMany,
 				                                   fortifyPriority,
 				                                   Request.RequestType.Fortify));
 				return;	//Don't attack
@@ -82,12 +89,22 @@ public class AIBaseController : MonoBehaviour {
 			//Attack
 			if(leastEnemy != null && tryChance(baseScript.NumberOfUnits, leastEnemies))
 			{
+				int howMany = (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 10);
+
+
+				if (howMany == 0)
+				{
+					print (howMany);
+					return;	//Dont send 0
+				}
+
+
 				//Set priority      mind div(0)
 				attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
 
 				centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastEnemy.transform.position,
-				                                   (int)(leastEnemy.GetComponent<Base>().NumberOfUnits + 10),
+				                                   howMany,
 				                                   attackPriority,
 				                                   Request.RequestType.Attack));
 			}
@@ -96,19 +113,14 @@ public class AIBaseController : MonoBehaviour {
 
 	bool tryChance(float us, float them)
 	{
-		//us += 1; 	//Prevent div by 0
-		//them += 1;
-
-		//if (us == 0 || us == 1)
-		//{
-		//	return false;
-		//}
+		us += 1; 	//Prevent div by 0
 
 		float f = Random.Range (0f, 1f);
 
-		if (f > them/us)
+		if (f > them/us + 0.1 /* && them != 0 && us != 0 */)
 		{
-			//print (this.name + ": " + f + " , " + them/us);
+			//if (leastFriend != null)
+				//print (this.name + " attacking: " + leastFriend.name + ". us: " + us + ", them: " + them + ". Random = " + f + " , chance = " (int)(them/us + 0.1));
 			//if (us == 0) {print ("div by 0");}
 			return true;
 		}

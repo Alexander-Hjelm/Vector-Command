@@ -50,6 +50,7 @@
      <Compile Include="Assets\BaseCollisionController.cs" />
      <Compile Include="Assets\BlastCollisionController.cs" />
      <Compile Include="Assets\CentralAI.cs" />
+     <Compile Include="Assets\LineRemover.cs" />
      <Compile Include="Assets\LvlGenerator.cs" />
      <Compile Include="Assets\ParticleDestroySelf.cs" />
      <Compile Include="Assets\Request.cs" />

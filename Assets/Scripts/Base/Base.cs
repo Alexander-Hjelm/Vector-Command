@@ -11,7 +11,7 @@ public class Base : MonoBehaviour {
 	public int NumberOfUnits = 0;
 	public int MaxNumberOfUntis = 10;
 
-	float spawnRate = 1f;	//For spawning units
+	public float spawnRate = 1f;	//For spawning units
 
 	float hpRegenRate = 0.2f;
 	
@@ -48,7 +48,7 @@ public class Base : MonoBehaviour {
 	{
 		ChangeOwner (owner);
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
-		InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
+		//InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
 		transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
 
 		//Draw lines to neighbours
@@ -91,6 +91,14 @@ public class Base : MonoBehaviour {
 		}
 	}
 
+	public void AddUnit(int num)
+	{
+		if (NumberOfUnits < MaxNumberOfUntis)
+		{
+			NumberOfUnits += num;
+		}
+	}
+
 	public void ChangeOwner(int newOwner)
 	{
 		this.owner = newOwner;
@@ -98,6 +106,7 @@ public class Base : MonoBehaviour {
 		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner
 	}
 
+	/*
 	void RegenHp()
 	{
 		if (hpScript.hp < hpScript.maxHp)
@@ -105,4 +114,5 @@ public class Base : MonoBehaviour {
 			hpScript.modHp (1);
 		}
 	}
+	*/
 }

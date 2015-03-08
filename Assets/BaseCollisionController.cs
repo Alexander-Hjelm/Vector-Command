@@ -66,11 +66,11 @@ public class BaseCollisionController : MonoBehaviour {
 					}
 					else 	//other owner
 					{
-						hpScript.modHp(-10);
-						if (hpScript.hp <= 0)	//dead
+						baseScript.AddUnit(-2);
+						if (baseScript.NumberOfUnits <= 0)	//dead
 						{
 							baseScript.ChangeOwner(ship.GetComponent<Ship>().owner);		//change owner
-							hpScript.hp = 1;
+							baseScript.NumberOfUnits = 1;
 						}
 					}
 					
