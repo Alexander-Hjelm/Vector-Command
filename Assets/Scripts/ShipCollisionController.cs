@@ -27,18 +27,20 @@ public class ShipCollisionController : MonoBehaviour {
 
 		shipList = shipPool.GetComponent<ObjectPoolerScript> ().pooledObjects;
 
-		if (shipList != null)
+		if (shipList != null && this.enabled)
 		{
 			shipList = shipPool.GetComponent<ObjectPoolerScript> ().pooledObjects;
 			foreach(GameObject ship in shipList)
 			{
 				//print ("Bummer");
-				if((ship.transform.position - transform.position).magnitude < thresh)
+				if(ship.activeSelf
+				   && ship.gameObject.GetComponent<Ship>().owner != shipScript.owner
+				   &&(ship.transform.position - transform.position).magnitude < thresh)
 				{
 					if (!(ship.GetInstanceID() == this.gameObject.GetInstanceID()))	//Might be this
 					{
+						//print ("found Ship in range");
 						return ship;
-						print ("found Ship in range");
 					}
 				}
 		

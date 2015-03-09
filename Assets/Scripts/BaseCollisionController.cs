@@ -52,7 +52,7 @@ public class BaseCollisionController : MonoBehaviour {
 	
 	void CheckCollision()	//Main
 	{
-		TryForCloseShip(threshDist);
+		TryForCloseShip(threshDist * transform.localScale.x);
 
 		foreach (GameObject ship in closeShips)
 		{
