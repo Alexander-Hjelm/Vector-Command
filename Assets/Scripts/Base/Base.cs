@@ -19,6 +19,7 @@ public class Base : MonoBehaviour {
 	SpriteRenderer spriteRenderer;
 	BaseHp hpScript;
 	ShipSpawn shipSpawn;
+	GameObject activeRing;
 
 	//UI refs
 	Text numOfShipsText;
@@ -46,6 +47,7 @@ public class Base : MonoBehaviour {
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
 
 		mapMarker = transform.FindChild ("MapMarker").gameObject;
+		activeRing = transform.FindChild ("ActiveRing").gameObject;
 	}
 
 	void Start()

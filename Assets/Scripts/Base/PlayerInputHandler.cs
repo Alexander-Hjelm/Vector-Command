@@ -6,8 +6,10 @@ public class PlayerInputHandler : MonoBehaviour {
 	//refs to this
 	Base baseScript;
 	ShipSpawn shipSpawn;
+	GameObject activeRing;
 	public GameObject colliderObj3D;
 	
+
 	//refs to other
 	PlayerHandler playerHandler;
 
@@ -27,6 +29,8 @@ public class PlayerInputHandler : MonoBehaviour {
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler").GetComponent<PlayerHandler>();
 		lineRenderer = this.GetComponentInChildren<LineRenderer> ();
 		lineRenderer.enabled = false;
+		activeRing = this.transform.FindChild ("ActiveRing").gameObject;
+		activeRing.SetActive (false);
 	}
 
 	void Update()
@@ -50,6 +54,7 @@ public class PlayerInputHandler : MonoBehaviour {
 
 			// Line Renderer Stuph
 			lineRenderer.enabled = true;
+			activeRing.SetActive(true);
 		}
 	}
 
@@ -58,6 +63,7 @@ public class PlayerInputHandler : MonoBehaviour {
 		shipSpawn.StopSpawn();
 		spawning = false;
 		lineRenderer.enabled = false;
+		activeRing.SetActive(false);
 	}
 	
 	IEnumerator ShipSpawnHandler()

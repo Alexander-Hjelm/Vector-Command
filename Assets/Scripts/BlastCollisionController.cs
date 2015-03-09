@@ -39,7 +39,6 @@ public class BlastCollisionController : MonoBehaviour {
 				{
 					//Spawn particle system
 					InstParticleSystem();
-					print("Dead!");
 				}
 
 				gameObject.SetActive(false);				//Inactivate
