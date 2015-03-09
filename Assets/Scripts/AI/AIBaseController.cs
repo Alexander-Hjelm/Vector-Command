@@ -31,7 +31,7 @@ public class AIBaseController : MonoBehaviour {
 
 		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + baseScript.owner.ToString()).GetComponent<CentralAI>();
 
-		InvokeRepeating ("EvaluateNeighbours", 1f, 1f);
+		InvokeRepeating ("EvaluateNeighbours", 1f, 0.1f);	//adj for difficulty
 	}
 
 	void EvaluateNeighbours()
@@ -115,7 +115,7 @@ public class AIBaseController : MonoBehaviour {
 	{
 		us += 1; 	//Prevent div by 0
 
-		float f = Random.Range (0f, 1f);
+		float f = Random.Range (0f, 1.5f);	//adj for difficulty
 
 		if (f > them/us + 0.1 /* && them != 0 && us != 0 */)
 		{

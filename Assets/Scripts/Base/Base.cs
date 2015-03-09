@@ -97,7 +97,7 @@ public class Base : MonoBehaviour {
 
 	public void AddUnit(int num)
 	{
-		if (NumberOfUnits < MaxNumberOfUntis)
+		if (NumberOfUnits < MaxNumberOfUntis || num <= 0)
 		{
 			NumberOfUnits += num;
 		}
@@ -105,6 +105,7 @@ public class Base : MonoBehaviour {
 
 	public void ChangeOwner(int newOwner)
 	{
+		shipSpawn.StopSpawn ();
 		this.owner = newOwner;
 		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
 		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner

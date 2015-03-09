@@ -10,6 +10,8 @@ public class CentralAI : MonoBehaviour {
 	Request currentInstruction;
 	int currentCycle = 0;
 
+	PlayerHandler playerHandler;
+
 	// Use this for initialization
 	void Start () {
 		InvokeRepeating ("performCurrentInstruction", 0.5f, gameFreq);

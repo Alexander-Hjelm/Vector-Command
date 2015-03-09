@@ -18,11 +18,27 @@ public class PlayerInputHandler : MonoBehaviour {
 
 	public bool spawning = false;
 
+	LineRenderer lineRenderer;
+
 	void Awake ()
 	{
 		baseScript = gameObject.GetComponent<Base> ();
 		shipSpawn = gameObject.GetComponent<ShipSpawn> ();
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler").GetComponent<PlayerHandler>();
+		lineRenderer = this.GetComponentInChildren<LineRenderer> ();
+		lineRenderer.enabled = false;
+	}
+
+	void Update()
+	{
+		if (Input.GetMouseButton(0))
+		{
+			Vector3 first = clickPos - new Vector3(0,0,clickPos.z);
+			Vector3 second = mousePos - new Vector3(0,0,mousePos.z);
+
+			lineRenderer.SetPosition(0, first);
+			lineRenderer.SetPosition(1, second);
+		}
 	}
 
 	void OnMouseDown()
@@ -31,6 +47,9 @@ public class PlayerInputHandler : MonoBehaviour {
 		{
 			clickPos = ClickPos2World();
 			StartCoroutine("ShipSpawnHandler");
+
+			// Line Renderer Stuph
+			lineRenderer.enabled = true;
 		}
 	}
 
@@ -38,6 +57,7 @@ public class PlayerInputHandler : MonoBehaviour {
 	{
 		shipSpawn.StopSpawn();
 		spawning = false;
+		lineRenderer.enabled = false;
 	}
 	
 	IEnumerator ShipSpawnHandler()
@@ -48,7 +68,9 @@ public class PlayerInputHandler : MonoBehaviour {
 			Debug.DrawLine(clickPos, mousePos);
 
 			hoverTarget = GetCollision();
-			if (hoverTarget != null && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
+			if (hoverTarget != null 
+			    && hoverTarget.tag != "BG"
+			    && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
 			{
 				if (!spawning)
 				{
