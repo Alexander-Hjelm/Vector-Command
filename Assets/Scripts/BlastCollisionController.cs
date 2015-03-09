@@ -52,8 +52,8 @@ public class BlastCollisionController : MonoBehaviour {
 		partSys.transform.position = blastScript.combatTarget.transform.position;
 
 		Quaternion partRot = partSys.transform.rotation = this.transform.rotation;
-		partRot.x = 0.0f;	//only rot in z
-		partRot.y = 0.0f;
+		partRot.z = -90f;	//only rot in z
+		partRot.y = 90f;
 		partSys.transform.rotation = partRot;
 
 		//Set color to target ship
