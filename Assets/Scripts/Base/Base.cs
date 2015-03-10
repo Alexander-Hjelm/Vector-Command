@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -19,7 +19,6 @@ public class Base : MonoBehaviour {
 	SpriteRenderer spriteRenderer;
 	BaseHp hpScript;
 	ShipSpawn shipSpawn;
-	GameObject activeRing;
 
 	//UI refs
 	Text numOfShipsText;
@@ -47,7 +46,6 @@ public class Base : MonoBehaviour {
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
 
 		mapMarker = transform.FindChild ("MapMarker").gameObject;
-		activeRing = transform.FindChild ("ActiveRing").gameObject;
 	}
 
 	void Start()

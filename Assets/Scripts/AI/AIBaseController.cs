@@ -22,6 +22,12 @@ public class AIBaseController : MonoBehaviour {
 
 	List<GameObject> neighbours;
 
+	//Difficulty-related stuff
+	int difficulty = 3;
+	//Easy-med-hard-insane
+	float[] minUnitRatioToAttack = {1.2f, 1.5f, 1.7f, 1.9f};
+
+
 	void Start()
 	{
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
@@ -32,6 +38,12 @@ public class AIBaseController : MonoBehaviour {
 		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + baseScript.owner.ToString()).GetComponent<CentralAI>();
 
 		InvokeRepeating ("EvaluateNeighbours", 1f, 0.1f);	//adj for difficulty
+
+		//set difficulty:
+		if(PlayerPrefs.GetInt("diff") != null)
+		{
+			difficulty = PlayerPrefs.GetInt("diff");
+		}
 	}
 
 	void EvaluateNeighbours()
@@ -115,7 +127,7 @@ public class AIBaseController : MonoBehaviour {
 	{
 		us += 1; 	//Prevent div by 0
 
-		float f = Random.Range (0f, 1.5f);	//adj for difficulty
+		float f = Random.Range (0f, minUnitRatioToAttack[difficulty]);	//adj for difficulty
 
 		if (f > them/us + 0.1 /* && them != 0 && us != 0 */)
 		{
