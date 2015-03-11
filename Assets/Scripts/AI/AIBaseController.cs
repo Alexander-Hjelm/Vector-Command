@@ -8,7 +8,6 @@ public class AIBaseController : MonoBehaviour {
 
 	//refs to self
 	Base baseScript;
-	public CentralAI centralAI;
 
 	//vars
 	float leastFriendlies = 0;
@@ -35,15 +34,10 @@ public class AIBaseController : MonoBehaviour {
 		baseScript = gameObject.GetComponent<Base> ();
 		neighbours = baseScript.neighbours;
 
-		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + baseScript.owner.ToString()).GetComponent<CentralAI>();
-
 		InvokeRepeating ("EvaluateNeighbours", 1f, 0.1f);	//adj for difficulty
 
 		//set difficulty:
-		if(PlayerPrefs.GetInt("diff") != null)
-		{
-			difficulty = PlayerPrefs.GetInt("diff");
-		}
+		difficulty = PlayerPrefs.GetInt("diff");
 	}
 
 	void EvaluateNeighbours()
@@ -91,7 +85,7 @@ public class AIBaseController : MonoBehaviour {
 				//print ("us: " + baseScript.NumberOfUnits + ", them: " + leastFriendlies);
 				//print ((int)((baseScript.NumberOfUnits - leastFriend.GetComponent<Base>().NumberOfUnits)*0.3) + " units");
 				fortifyPriority = 1 - leastFriendlies / (baseScript.NumberOfUnits + 1);
-				centralAI.inputRequest(new Request(this.gameObject,
+				baseScript.centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastFriend.transform.position,
 				                                   howMany,
 				                                   fortifyPriority,
@@ -114,7 +108,7 @@ public class AIBaseController : MonoBehaviour {
 				//Set priority      mind div(0)
 				attackPriority = 1 - leastEnemies / baseScript.NumberOfUnits;
 
-				centralAI.inputRequest(new Request(this.gameObject,
+				baseScript.centralAI.inputRequest(new Request(this.gameObject,
 				                                   leastEnemy.transform.position,
 				                                   howMany,
 				                                   attackPriority,

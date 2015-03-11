@@ -21,6 +21,7 @@ public class ShipSpawn : MonoBehaviour {
 	{
 		if(shouldBeSpawning)
 		{
+			CancelInvoke ("SpawnUnit");
 			InvokeRepeating("SpawnUnit", 0.1f, gameFreq);
 			shouldBeSpawning = false;
 		}
@@ -29,6 +30,7 @@ public class ShipSpawn : MonoBehaviour {
 	public void StopSpawn()
 	{
 		CancelInvoke ("SpawnUnit");
+		shouldBeSpawning = false;
 	}
 
 	public void initiateAttack(Base bas, Vector3 pos)
@@ -36,6 +38,8 @@ public class ShipSpawn : MonoBehaviour {
 		baseScript = bas;
 		targetPos = pos;
 		shouldBeSpawning = true;
+
+		print (this.name + " attacking " + bas.name + " at " + targetPos);
 	}
 
 	public void SpawnUnit()
@@ -46,7 +50,6 @@ public class ShipSpawn : MonoBehaviour {
 			Quaternion rot = Quaternion.LookRotation (transform.position - pos, Vector3.forward);
 			rot.x = 0;
 			rot.y = 0;
-
 
 			//spawns single unit w/ same owner as this base
 			GameObject unit = shipPool.GetAvailablePooledObject();

@@ -35,7 +35,7 @@ public class XMLGetter : MonoBehaviour {
 			baseList.Add(GameObject.Instantiate(basePrefab) as GameObject);	//inst base and add instance to base list
 
 			Base baseScript = baseList.Last().GetComponent<Base>();
-			baseScript.worldPos = new Vector3(md.x, md.y, 0);	//assign world pos
+			//baseScript.worldPos = new Vector3(md.x, md.y, 0);	//assign world pos
 			baseScript.owner = md.owner;	//assign owner
 			//Debug.Log (md.neighbours[0].id);
 		}
@@ -54,11 +54,6 @@ public class XMLGetter : MonoBehaviour {
 			}
 
 			baseList[i].name = ("Base " + i);
-		}
-
-		foreach (GameObject bas in baseList)
-		{
-			//foreach (int n in bas.GetComponent<>
 		}
 	}
 

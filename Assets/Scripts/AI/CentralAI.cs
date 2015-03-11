@@ -14,6 +14,7 @@ public class CentralAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler").GetComponent<PlayerHandler>();
 		InvokeRepeating ("performCurrentInstruction", 0.5f, gameFreq);
 	}
 
@@ -27,7 +28,10 @@ public class CentralAI : MonoBehaviour {
 
 			//print (currentInstruction.sendingBase.name + " Changed instruction. Sending " + currentInstruction.howMany + " units.");
 
-			currentInstruction.sendingBase.GetComponent<ShipSpawn>().initiateAttack( currentInstruction.sendingBase.GetComponent<Base>(), currentInstruction.targetPos);	//Spawn ship w/ data of
+			if (currentInstruction.sendingBase.GetComponent<Base>().owner != playerHandler.GetComponent<PlayerHandler>().playerInt)
+				currentInstruction.sendingBase.GetComponent<ShipSpawn>().initiateAttack( currentInstruction.sendingBase.GetComponent<Base>(), currentInstruction.targetPos);	//Spawn ship w/ data of
+
+
 			currentCycle++;
 		}
 		else if (currentInstruction != null)
@@ -50,7 +54,20 @@ public class CentralAI : MonoBehaviour {
 
 		requestList.Add (request);
 	}
+	/*
+	public void EmptyRequestList(GameObject bas)
+	{
+		foreach( Request r in requestList)
+		{
+			print ("Removed request!");
+			if (r.sendingBase = bas)
+			{
+				requestList.Remove(r);
 
+			}
+		}
+	}
+	*/
 
 	//fucntionc for sorting requestList according to priority
 }

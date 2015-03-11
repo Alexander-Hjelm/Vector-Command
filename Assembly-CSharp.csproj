@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BaseOwnerAssigner.cs" />
+     <Compile Include="Assets\DifficultySelect.cs" />
      <Compile Include="Assets\PanController.cs" />
      <Compile Include="Assets\Scripts\AI\AIBaseController.cs" />
      <Compile Include="Assets\Scripts\AI\CentralAI.cs" />

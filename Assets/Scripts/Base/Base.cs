@@ -5,19 +5,16 @@ using UnityEngine.UI;
 
 public class Base : MonoBehaviour {
 
-	public Vector3 worldPos;	//Where in the world is this base?
+	//public Vector3 worldPos;	//Where in the world is this base?
 	public int owner;
 
 	public int NumberOfUnits = 0;
 	public int MaxNumberOfUntis = 10;
 
 	public float spawnRate = 1f;	//For spawning units
-
-	float hpRegenRate = 0.2f;
 	
 	//Scripts on this
 	SpriteRenderer spriteRenderer;
-	BaseHp hpScript;
 	ShipSpawn shipSpawn;
 
 	//UI refs
@@ -34,12 +31,13 @@ public class Base : MonoBehaviour {
 
 	public GameObject mapMarker;	//this on minimap
 
+	public CentralAI centralAI;	//For emptying requestlist on takeover
+
 	void Awake()
 	{
 		//refs
 		numOfShipsText = this.GetComponentInChildren<Text> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
-		hpScript = this.GetComponent<BaseHp> ();
 		shipSpawn = this.GetComponent<ShipSpawn> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
@@ -50,7 +48,7 @@ public class Base : MonoBehaviour {
 
 	void Start()
 	{
-		ChangeOwner (owner);
+		//ChangeOwner (owner);
 		InvokeRepeating ("AddUnit", 0f, spawnRate);	//Incr unit count over time, cancel invoke and invoke again to change
 		//InvokeRepeating ("RegenHp", 0f, hpRegenRate);	//Hp Regen
 		//transform.position = new Vector3 (worldPos.x, worldPos.y, 0);
@@ -110,6 +108,10 @@ public class Base : MonoBehaviour {
 		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
 		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner
 		mapMarker.GetComponent<SpriteRenderer>().color = playerCols[newOwner];
+
+		//AI
+		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + owner.ToString()).GetComponent<CentralAI>();
+		//centralAI.EmptyRequestList (this.gameObject);
 	}
 
 	/*

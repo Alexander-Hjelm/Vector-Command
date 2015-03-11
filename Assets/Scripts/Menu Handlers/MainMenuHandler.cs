@@ -16,6 +16,8 @@ public class MainMenuHandler : MonoBehaviour {
 
 	public GameObject descFieldText;
 
+	public GameObject diffButton;
+
 	public void GotoCharCreation()
 	{
 		initMenu.SetActive (false);
@@ -43,8 +45,14 @@ public class MainMenuHandler : MonoBehaviour {
 	public void StartGame()
 	{
 		PlayerPrefs.SetString ("PlayerName", nameText.GetComponent<Text> ().text);
-		PlayerPrefs.SetString ("PlayerCol", classToggleGroup.GetComponent<ToggleGroup>().ActiveToggles().FirstOrDefault().GetComponentInChildren<Text>().text);
+
+		int col = int.Parse(classToggleGroup.GetComponent<ToggleGroup> ().ActiveToggles ().FirstOrDefault ().name.Split (' ') [1]);
+
+		PlayerPrefs.SetInt ("PlayerCol", col);
+		print(PlayerPrefs.GetInt("PlayerCol"));
+
 		charMenu.SetActive (false);
 		lvlMenu.SetActive (true);
+		PlayerPrefs.SetInt("diff", diffButton.GetComponent<DifficultySelect>().currentDiff);
 	}
 }

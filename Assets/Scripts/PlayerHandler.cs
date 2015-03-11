@@ -8,9 +8,9 @@ public class PlayerHandler : MonoBehaviour {
 
 	public int playerInt;
 
-	void Awake()
+	void Start()
 	{
-		playerInt = 1;
+		playerInt = PlayerPrefs.GetInt("PlayerCol");
 
 		playerCols [0] = Color.white;
 		playerCols [1] = Color.green;
@@ -27,42 +27,5 @@ public class PlayerHandler : MonoBehaviour {
 		playerNames [4] = "Yoshimura 12";
 		playerNames [5] = "Mod_Myriad";
 		playerNames [6] = "Imperion";
-	}
-
-	void OnEnable ()
-	{
-		SetupPlayerName ();
-	}
-
-	void SetupPlayerName()
-	{
-		switch (PlayerPrefs.GetString("PlayerCol"))
-		{
-			case "Green":
-				playerNames[1] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 1;
-				break;
-			case "Blue":
-				playerNames[2] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 2;
-				break;
-			case "Yellow":
-				playerNames[3] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 3;
-				break;
-			case "Magenta":
-				playerNames[4] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 4;
-				break;
-			case "Red":
-				playerNames[5] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 5;
-				break;
-			case "Cyan":
-				playerNames[6] = PlayerPrefs.GetString("PlayerName");
-				playerInt = 6;
-				break;
-		}
-
 	}
 }
