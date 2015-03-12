@@ -16,7 +16,6 @@ public class PanController : MonoBehaviour {
 
 		if (Input.GetMouseButton(1))
 		{
-			print ("DERP HERP!");
 			if (Input.GetAxis("Mouse ScrollWheel") > 0)
 			{
 				panTarget.transform.position += Vector3.down*zoomSpeed;

@@ -16,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour {
 	public Vector3 clickPos;
 	public Vector3 mousePos;
 	public GameObject hoverTarget;
+	bool active = false;
 
 	public bool spawning = false;
 
@@ -42,27 +43,23 @@ public class PlayerInputHandler : MonoBehaviour {
 			lineRenderer.SetPosition(0, first);
 			lineRenderer.SetPosition(1, second);
 		}
-	}
-
-	void OnMouseDown()
-	{
-		if (baseScript.owner == playerHandler.playerInt)	//If we clicked on one o the player's bases
+		else
 		{
-			clickPos = ClickPos2World();
-			StartCoroutine("ShipSpawnHandler");
+			Activate(false);
+		}
 
-			// Line Renderer Stuph
-			lineRenderer.enabled = true;
-			activeRing.SetActive(true);
+		if(active && baseScript.owner != playerHandler.playerInt)
+		{
+			Activate(false);
 		}
 	}
 
-	void OnMouseUp()
+	void OnMouseOver()
 	{
-		shipSpawn.StopSpawn();
-		spawning = false;
-		lineRenderer.enabled = false;
-		activeRing.SetActive(false);
+		if(Input.GetMouseButton(0) && baseScript.owner == playerHandler.playerInt)
+		{
+			Activate(true);
+		}
 	}
 	
 	IEnumerator ShipSpawnHandler()
@@ -73,21 +70,26 @@ public class PlayerInputHandler : MonoBehaviour {
 			Debug.DrawLine(clickPos, mousePos);
 
 			hoverTarget = GetCollision();
-			if (hoverTarget != null 
-			    && hoverTarget.tag != "BG"
-			    && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
+			if (hoverTarget != null && hoverTarget.tag != "BG")
 			{
-				if(this.name == "Base4")
-				{
-					print (this.name + " attacking " + hoverTarget.name);
-				}
-
 				if (!spawning)
 				{
-					print ("Sending airmail!");
-					shipSpawn.StopSpawn();
-					shipSpawn.initiateAttack(baseScript, hoverTarget.transform.parent.position);
-					spawning = true;
+					if(baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
+					{
+						shipSpawn.StopSpawn();
+						shipSpawn.initiateAttack(baseScript, hoverTarget.transform.parent.position);
+						spawning = true;
+					}
+					else if(hoverTarget.transform.parent.position != this.transform.position)	//Could be this
+					{
+						GameObject b = FindClosestBase(hoverTarget.transform.parent);
+						if (b != null)
+							{
+							shipSpawn.StopSpawn();
+							shipSpawn.initiateAttack(baseScript, FindClosestBase(hoverTarget.transform.parent).transform.position);
+							spawning = true;
+						}
+					}
 				}
 			}
 			else
@@ -122,5 +124,44 @@ public class PlayerInputHandler : MonoBehaviour {
 			return hit.collider.gameObject;
 		}
 		else return null;
+	}
+
+	void Activate(bool b)
+	{
+		activeRing.SetActive (b);
+		active = b;
+		// Line Renderer Stuph
+		lineRenderer.enabled = b;
+
+		if(b)
+		{
+			clickPos = ClickPos2World();
+			StartCoroutine("ShipSpawnHandler");
+		}
+		else
+		{
+			shipSpawn.StopSpawn();
+			spawning = false;
+			StopCoroutine("ShipSpawnHandler");
+		}
+
+		return;
+	}
+
+	GameObject FindClosestBase(Transform inputBase)
+	{
+		GameObject closest = null;
+		float closestDist = 999999999f;
+		foreach(GameObject b in baseScript.neighbours)
+		{
+			float mag = (b.transform.position - inputBase.position).magnitude;
+
+			if(mag < closestDist && b.GetComponent<Base>().owner == playerHandler.playerInt)
+			{
+				closest = b;
+				closestDist = mag;
+			}
+		}
+		return closest;
 	}
 }

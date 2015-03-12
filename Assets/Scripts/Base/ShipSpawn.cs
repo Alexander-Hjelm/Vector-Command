@@ -31,7 +31,6 @@ public class ShipSpawn : MonoBehaviour {
 	{
 		CancelInvoke ("SpawnUnit");
 		shouldBeSpawning = false;
-		print ("Stopped attacking!");
 	}
 
 	public void initiateAttack(Base bas, Vector3 pos)

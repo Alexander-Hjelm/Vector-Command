@@ -16,8 +16,6 @@ public class LvlGenerator : MonoBehaviour {
 			for (int j = 1; j <= 4; j++)
 			{
 
-				print ("Instantiating button");
-
 				GameObject button = Instantiate(lvlButtonPrefab) as GameObject;
 				button.transform.SetParent(canvas.transform);
 				button.GetComponent<RectTransform>().position = new Vector3(100 + 100*j, 600 - 100*i, 0);

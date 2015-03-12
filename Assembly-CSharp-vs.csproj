@@ -46,9 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BaseOwnerAssigner.cs" />
-     <Compile Include="Assets\DifficultySelect.cs" />
-     <Compile Include="Assets\PanController.cs" />
      <Compile Include="Assets\Scripts\AI\AIBaseController.cs" />
      <Compile Include="Assets\Scripts\AI\CentralAI.cs" />
      <Compile Include="Assets\Scripts\Base\Base.cs" />
@@ -58,8 +55,12 @@
      <Compile Include="Assets\Scripts\Base\PlayerInputHandler.cs" />
      <Compile Include="Assets\Scripts\Base\ShipSpawn.cs" />
      <Compile Include="Assets\Scripts\BaseCollisionController.cs" />
+     <Compile Include="Assets\Scripts\BaseOwnerAssigner.cs" />
      <Compile Include="Assets\Scripts\Blast.cs" />
      <Compile Include="Assets\Scripts\BlastCollisionController.cs" />
+     <Compile Include="Assets\Scripts\ButtonBackToMenu.cs" />
+     <Compile Include="Assets\Scripts\DifficultySelect.cs" />
+     <Compile Include="Assets\Scripts\EndScreenHandler.cs" />
      <Compile Include="Assets\Scripts\LineRemover.cs" />
      <Compile Include="Assets\Scripts\LineScript.cs" />
      <Compile Include="Assets\Scripts\Menu Handlers\CharMenuHandler.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Menu Handlers\MainMenuHandler.cs" />
      <Compile Include="Assets\Scripts\Menu Handlers\PauseMenuHandler.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
+     <Compile Include="Assets\Scripts\PanController.cs" />
      <Compile Include="Assets\Scripts\ParticleDestroySelf.cs" />
      <Compile Include="Assets\Scripts\PlayerHandler.cs" />
      <Compile Include="Assets\Scripts\Request.cs" />

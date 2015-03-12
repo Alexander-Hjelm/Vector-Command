@@ -1,12 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\CentralAI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Base\PlayerInputHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\Base\ShipSpawn.cs" Line="33" Column="28" />
-      <File FileName="Assets\Scripts\Base\Base.cs" Line="108" Column="18" />
-      <File FileName="Assets\Scripts\AI\AIBaseController.cs" Line="2" Column="11" />
-      <File FileName="Assets\Scripts\AI\CentralAI.cs" Line="30" Column="8" />
-      <File FileName="Assets\Scripts\Base\PlayerInputHandler.cs" Line="86" Column="6" />
+      <File FileName="Assets\Scripts\Base\PlayerInputHandler.cs" Line="45" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
