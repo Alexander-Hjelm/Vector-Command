@@ -8,7 +8,6 @@ public class PlayerInputHandler : MonoBehaviour {
 	ShipSpawn shipSpawn;
 	GameObject activeRing;
 	public GameObject colliderObj3D;
-	
 
 	//refs to other
 	PlayerHandler playerHandler;
@@ -78,8 +77,15 @@ public class PlayerInputHandler : MonoBehaviour {
 			    && hoverTarget.tag != "BG"
 			    && baseScript.neighbours.Contains( hoverTarget.transform.parent.gameObject ) && hoverTarget != colliderObj3D)
 			{
+				if(this.name == "Base4")
+				{
+					print (this.name + " attacking " + hoverTarget.name);
+				}
+
 				if (!spawning)
 				{
+					print ("Sending airmail!");
+					shipSpawn.StopSpawn();
 					shipSpawn.initiateAttack(baseScript, hoverTarget.transform.parent.position);
 					spawning = true;
 				}

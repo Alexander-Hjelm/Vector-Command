@@ -16,6 +16,7 @@ public class Base : MonoBehaviour {
 	//Scripts on this
 	SpriteRenderer spriteRenderer;
 	ShipSpawn shipSpawn;
+	PlayerInputHandler inputHandler;
 
 	//UI refs
 	Text numOfShipsText;
@@ -39,6 +40,7 @@ public class Base : MonoBehaviour {
 		numOfShipsText = this.GetComponentInChildren<Text> ();
 		spriteRenderer = this.GetComponent<SpriteRenderer> ();
 		shipSpawn = this.GetComponent<ShipSpawn> ();
+		inputHandler = this.GetComponent<PlayerInputHandler> ();
 
 		playerHandler = GameObject.FindGameObjectWithTag ("PlayerHandler");
 		playerCols = playerHandler.GetComponent<PlayerHandler> ().playerCols;
@@ -108,6 +110,7 @@ public class Base : MonoBehaviour {
 		spriteRenderer.color = playerCols [newOwner];	//Change color of sprite
 		numOfShipsText.color = playerCols [newOwner];	//Change color of GUI text to match that of owner
 		mapMarker.GetComponent<SpriteRenderer>().color = playerCols[newOwner];
+		inputHandler.spawning = false;
 
 		//AI
 		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + owner.ToString()).GetComponent<CentralAI>();

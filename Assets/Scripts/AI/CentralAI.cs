@@ -20,6 +20,7 @@ public class CentralAI : MonoBehaviour {
 
 	void performCurrentInstruction()
 	{
+
 		//print ("current cycle: " + currentCycle.ToString () + ", max: " + currentInstruction.howMany.ToString ());
 		if (currentCycle == 0 && requestList.Count != 0)	// no instruciton is loaded
 		{
@@ -37,6 +38,13 @@ public class CentralAI : MonoBehaviour {
 		else if (currentInstruction != null)
 		{
 			currentCycle++;
+		}
+
+		if (currentInstruction != null && currentInstruction.sendingBase.GetComponent<Base>().owner == playerHandler.GetComponent<PlayerHandler> ().playerInt)
+		{
+			currentInstruction = null;
+			currentCycle = 0;
+			return;	//this base belongs to owner
 		}
 
 		if(currentInstruction != null && currentCycle > currentInstruction.howMany)	//now we have waited enough

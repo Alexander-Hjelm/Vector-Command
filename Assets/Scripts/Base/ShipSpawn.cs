@@ -31,6 +31,7 @@ public class ShipSpawn : MonoBehaviour {
 	{
 		CancelInvoke ("SpawnUnit");
 		shouldBeSpawning = false;
+		print ("Stopped attacking!");
 	}
 
 	public void initiateAttack(Base bas, Vector3 pos)
@@ -39,7 +40,11 @@ public class ShipSpawn : MonoBehaviour {
 		targetPos = pos;
 		shouldBeSpawning = true;
 
-		print (this.name + " attacking " + bas.name + " at " + targetPos);
+		//debug
+//		if(this.name == "Base4")
+//		{
+//			print (this.name + " attacking " + bas.name + " at " + targetPos);
+//		}
 	}
 
 	public void SpawnUnit()
