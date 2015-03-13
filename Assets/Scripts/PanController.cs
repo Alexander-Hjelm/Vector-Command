@@ -16,18 +16,17 @@ public class PanController : MonoBehaviour {
 
 		if (Input.GetMouseButton(1))
 		{
-			if (Input.GetAxis("Mouse ScrollWheel") > 0)
-			{
-				panTarget.transform.position += Vector3.down*zoomSpeed;
-			}
-			if (Input.GetAxis("Mouse ScrollWheel") < 0)
-			{
-				panTarget.transform.position += Vector3.up*zoomSpeed;
-			}
-
 			panTarget.transform.position += Input.GetAxis("Mouse X") * Camera.main.transform.right * panSpeed;
 			panTarget.transform.position += Input.GetAxis("Mouse Y") * Camera.main.transform.up * panSpeed;
 
+		}
+		if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.GetComponent<Camera>().orthographicSize > 2)
+		{
+			Camera.main.GetComponent<Camera>().orthographicSize -= 0.5f;
+		}
+		if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.GetComponent<Camera>().orthographicSize < 10)
+		{
+			Camera.main.GetComponent<Camera>().orthographicSize += 0.5f;
 		}
 	}
 }

@@ -8,6 +8,8 @@ public class BaseOwnerAssigner : MonoBehaviour {
 	public GameObject playerBase;
 	public GameObject[] initialBases;
 
+	int[] taken = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
 	int i = 0;
 
 	// Use this for initialization
@@ -25,9 +27,9 @@ public class BaseOwnerAssigner : MonoBehaviour {
 			do
 			{
 				i = Random.Range(1, playerHandler.playerCols.Length);
-			} while(i == playerHandler.playerInt);
+			} while(i == playerHandler.playerInt || taken[i] == 1);
 			b.GetComponent<Base>().ChangeOwner(i);
-			
+			taken[i] = 1;
 		}
 	}
 }
