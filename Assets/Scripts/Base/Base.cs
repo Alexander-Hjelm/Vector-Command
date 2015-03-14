@@ -112,6 +112,8 @@ public class Base : MonoBehaviour {
 		mapMarker.GetComponent<SpriteRenderer>().color = playerCols[newOwner];
 		inputHandler.spawning = false;
 
+		inputHandler.Activate (false);
+
 		//AI
 		centralAI = GameObject.FindGameObjectWithTag("Central AI").transform.FindChild("AI_" + owner.ToString()).GetComponent<CentralAI>();
 		//centralAI.EmptyRequestList (this.gameObject);

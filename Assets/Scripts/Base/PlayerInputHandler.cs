@@ -35,22 +35,25 @@ public class PlayerInputHandler : MonoBehaviour {
 
 	void Update()
 	{
-		if (Input.GetMouseButton(0))
+		if(baseScript.owner == playerHandler.playerInt)
 		{
-			Vector3 first = clickPos - new Vector3(0,0,clickPos.z);
-			Vector3 second = mousePos - new Vector3(0,0,mousePos.z);
+			if (Input.GetMouseButton(0))
+			{
+				Vector3 first = clickPos - new Vector3(0,0,clickPos.z);
+				Vector3 second = mousePos - new Vector3(0,0,mousePos.z);
 
-			lineRenderer.SetPosition(0, first);
-			lineRenderer.SetPosition(1, second);
-		}
-		else
-		{
-			Activate(false);
-		}
+				lineRenderer.SetPosition(0, first);
+				lineRenderer.SetPosition(1, second);
+			}
+			else
+			{
+				Activate(false);
+			}
 
-		if(active && baseScript.owner != playerHandler.playerInt)
-		{
-			Activate(false);
+			if(active && baseScript.owner != playerHandler.playerInt)
+			{
+				Activate(false);
+			}
 		}
 	}
 
@@ -126,7 +129,7 @@ public class PlayerInputHandler : MonoBehaviour {
 		else return null;
 	}
 
-	void Activate(bool b)
+	public void Activate(bool b)
 	{
 		activeRing.SetActive (b);
 		active = b;

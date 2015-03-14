@@ -8,6 +8,8 @@ public class LvlGenerator : MonoBehaviour {
 	public GameObject lvlButtonPrefab;
 	public GameObject canvas;
 
+	public int numberOfLvls = 11;
+
 	// Use this for initialization
 	void Start () {
 
@@ -15,14 +17,16 @@ public class LvlGenerator : MonoBehaviour {
 		{
 			for (int j = 1; j <= 4; j++)
 			{
-
-				GameObject button = Instantiate(lvlButtonPrefab) as GameObject;
-				button.transform.SetParent(canvas.transform);
-				button.GetComponent<RectTransform>().position = new Vector3(100 + 100*j, 600 - 100*i, 0);
-				int lvl = (i-1)*4 +j;
-				button.GetComponentInChildren<Text>().text = (lvl).ToString();
-				button.GetComponent<Button>().onClick.RemoveAllListeners();
-				button.GetComponent<Button>().onClick.AddListener(delegate{LoadLvl(lvl);});
+				if((i-1)*4 +j <= numberOfLvls)
+				{
+					GameObject button = Instantiate(lvlButtonPrefab) as GameObject;
+					button.transform.SetParent(canvas.transform);
+					button.GetComponent<RectTransform>().position = new Vector3(100 + 100*j, 600 - 100*i, 0);
+					int lvl = (i-1)*4 +j;
+					button.GetComponentInChildren<Text>().text = (lvl).ToString();
+					button.GetComponent<Button>().onClick.RemoveAllListeners();
+					button.GetComponent<Button>().onClick.AddListener(delegate{LoadLvl(lvl);});
+				}
 			}
 		}
 	}
