@@ -1,0 +1,13 @@
+Spelkontroller:
+
+Attack:
+
+- Håll ner vänster musknapp över en bas av din egen färg för att göra denna bas aktiv
+- För musen (med vänster musknapp nere) över en angränsande bas för att skicka dit attackskepp från dina aktiva baser.
+
+Navigation:
+
+- Håll ner höger musknapp för att flytta kartan
+- Använd mushjulet för att zooma ut och in
+
+Avsluta i huvudmenyn eller när som helst med alt+F4

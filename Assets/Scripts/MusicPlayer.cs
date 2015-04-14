@@ -8,18 +8,18 @@ public class MusicPlayer : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		audio.clip = soundtrack[Random.Range(0, soundtrack.Length)];
-		audio.Play();
+		GetComponent<AudioSource>().clip = soundtrack[Random.Range(0, soundtrack.Length)];
+		GetComponent<AudioSource>().Play();
 		InvokeRepeating("PlayMusic", 0f, 5f);
 	}
 	
 	// Update is called once per frame
 	void PlayMusic ()
 	{
-		if (!audio.isPlaying)
+		if (!GetComponent<AudioSource>().isPlaying)
 		{
-			audio.clip = soundtrack[Random.Range(0, soundtrack.Length)];
-			audio.Play();
+			GetComponent<AudioSource>().clip = soundtrack[Random.Range(0, soundtrack.Length)];
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }

@@ -1,0 +1,33 @@
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 560  (ID=0x1201)
+    Vendor:   NVIDIA
+    VRAM:     971 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.057 seconds
+desktop: 1920x1080 59Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Gr00v3\Documents\Unity Projects\Vector Shooter\Build\Build_Data\Managed\System.dll (this message is harmless)
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.435200 ms
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 613.
+Total: 0.374000 ms (FindLiveObjects: 0.040577 ms CreateObjectMapping: 0.021511 ms MarkObjects: 0.288933 ms  DeleteObjects: 0.017111 ms)
+

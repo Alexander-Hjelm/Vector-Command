@@ -1,12 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu Handlers\LvlGenerator.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\Fight game\Fight Game\Assets\Scripts\CharacterAnimation.cs">
     <Files>
-      <File FileName="Assets\Scripts\BaseCollisionController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Base\PlayerInputHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AI\AIBaseController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BaseOwnerAssigner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menu Handlers\LvlGenerator.cs" Line="22" Column="69" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Combatsystem\CharacterCombatRay.cs" Line="90" Column="16" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\CharacterAnimation.cs" Line="73" Column="3" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Combatsystem\CharacterJab.cs" Line="50" Column="46" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Combatsystem\CharacterHook.cs" Line="3" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\GameMainLogic.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\PlayerHitController.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Utils\TargetScript.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Utils\Utils.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Utils\ObjectPool.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Utils\LookTarget.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Utils\DebugRotation.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\HandCollisionController\LeftHandCollisionController.cs" Line="1" Column="1" />
+      <File FileName="..\..\Fight game\Fight Game\Assets\Scripts\Combatsystem\CharacterBlock.cs" Line="67" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
